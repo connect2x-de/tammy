@@ -3237,7 +3237,6 @@ tree-dump@^1.0.3, tree-dump@^1.1.0:
 
 "trixnity-olm-wrapper@https://gitlab.com/api/v4/projects/46553592/packages/generic/build/v2.0.4/trixnity-olm-wrapper.tgz":
   version "0.0.1"
-  uid f7c0aa87d22688bbb6c802d699fd60e2cdd151be
   resolved "https://gitlab.com/api/v4/projects/46553592/packages/generic/build/v2.0.4/trixnity-olm-wrapper.tgz#f7c0aa87d22688bbb6c802d699fd60e2cdd151be"
   dependencies:
     "@matrix-org/olm" "^3.2.15"
