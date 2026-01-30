@@ -552,13 +552,13 @@ flatpak {
 
     flatpakDependencies.set(
         mapOf(
-            "runtime/org.freedesktop.Sdk/x86_64/24.08" to "59c3595a1607f4ad20479c722ed7338d99caea341e99aaaa0a93c3fafc46df41",
-            "runtime/org.freedesktop.Platform.GL.default/x86_64/24.08" to "26a4590b6101c284ab29ad9464eda4734f73c3c046d559bfa129dadad328de26",
-            "runtime/org.freedesktop.Sdk.Locale/x86_64/24.08" to "afe701cc3d8a64c41d9890dcbf7180662958fb2d63ab76e7848ea308087d8247",
-            "runtime/org.freedesktop.Platform.openh264/x86_64/2.5.1" to "0f52621e4540863ee86b1fe26216fff78fefa1096f367079692344139228e474",
-            "runtime/org.freedesktop.Platform.GL.default/x86_64/24.08extra" to "8eb83bf36c17d9b633e25ef86688a55d9a61cf50879f92da8ee48cea96f9f746",
-            "runtime/org.freedesktop.Platform/x86_64/24.08" to "e2cda5d7700bf0f02c764e151918a6e93def2634e8df9dc0dec52c4a1923ef88",
-            "runtime/org.freedesktop.Platform.Locale/x86_64/24.08" to "ffc8323f2585746bd8170cda64d5afd41c8467296f59a839a72faca67a9c63f0",
+            "runtime/org.freedesktop.Sdk/x86_64/25.08" to "4d24423cfeeb1845d96fb4536a3404666ed3473e267e4c56dbb7190b627290b0",
+            "runtime/org.freedesktop.Platform.GL.default/x86_64/25.08" to "0bf902ca42bdd0454bd610cbec2ba8843b585f299362c17fa584382e84acdbd2",
+            "runtime/org.freedesktop.Sdk.Locale/x86_64/25.08" to "4b67ec3e6049c1f912e16eeabc2674e0f3ecd62829ecd1598203726337bad792",
+            "runtime/org.freedesktop.Platform.codecs-extra/x86_64/25.08-extra" to "e4aa1279dc8b5878f71441b205ada5580842170c9a9f9c54f631874357bda86b",
+            "runtime/org.freedesktop.Platform.GL.default/x86_64/25.08-extra" to "925c7341364da37df070a86d35ccffd8e8b361dec0cb3e76a60bdaef848f4eda",
+            "runtime/org.freedesktop.Platform/x86_64/25.08" to "6482ce412b0584ab2e2191db1c1de27b7072b8945c20e83a661d284b9c10e6d4",
+            "runtime/org.freedesktop.Platform.Locale/x86_64/25.08" to "0ce6bee05b9517d87f905686beefcf1c96e112f407bb2be48623683687af4cfd",
         )
     )
 
