@@ -35,7 +35,7 @@ if (isRelease)
 val appSuffixedVersion = withVersionSuffix(appVersion)
 val appName = "Tammy"
 val appId = "de.connect2x.tammy"
-val oAuth2ClientUrl = "https://tammy.connect2x.de"
+val appHomepage = "https://tammy.connect2x.de"
 val privacyInfo = File("website/content/privacy.de-DE.md").readText().substringAfterMarkdownFrontMatter()
 val imprint = File("website/content/imprint.de-DE.md").readText().substringAfterMarkdownFrontMatter()
 
@@ -81,7 +81,7 @@ registerMultiplatformLicensesTasks { licenseTask, target, variant ->
                 override val flavor: Flavor = Flavor.valueOf("$buildFlavor")
                 override val appName: String = "$appName"
                 override val appId: String = "$appId"
-                override val oAuth2ClientUrl: String = "$oAuth2ClientUrl"
+                override val oAuth2ClientUrl: String = "$appHomepage"
                 override val licenses: String = $quotes$licencesString$quotes
                 override val privacyInfo: String = $quotes$privacyInfo$quotes
                 override val imprint: String = $quotes$imprint$quotes
@@ -575,7 +575,7 @@ flatpak {
 
     developerName.set(publisherName)
     publishedVersion.set(appVersion)
-    homepage.set("https://tammy.connect2x.de")
+    homepage.set(appHomepage)
 }
 
 val flatpakBundleDistribution =
