@@ -667,12 +667,12 @@ val packageReleasePlatformZip by tasks.creating(Zip::class) {
 
 val webZipDistribution = distributions.first { it.type == "zip" && it.platform == "Web" }
 
-val packageReleaseWebZip by tasks.creating(Zip::class) {
+val packageReleaseWebZip by tasks.registering(Zip::class) {
     group = "compose desktop"
     from(distributionDir.map { it.dir("web") })
-    archiveFileName = webZipDistribution.originalFileName
-    destinationDirectory = zipDistributionDir
-    dependsOn.add("webBrowserDistribution")
+    archiveFileName.set(webZipDistribution.originalFileName)
+    destinationDirectory.set(zipDistributionDir)
+    dependsOn.add("jsBrowserDistribution")
 }
 
 val uploadWebZipDistributable by tasks.registering {
