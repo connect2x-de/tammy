@@ -1,20 +1,17 @@
-import de.connect2x.conventions.configureJava
-import de.connect2x.conventions.registerMultiplatformLicensesTasks
+import de.connect2x.conventions.*
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.nio.file.Path
+
 
 plugins {
     alias(sharedLibs.plugins.kotlin.multiplatform)
@@ -22,7 +19,6 @@ plugins {
     alias(sharedLibs.plugins.compose.multiplatform)
     alias(sharedLibs.plugins.compose.compiler)
     alias(sharedLibs.plugins.aboutLibraries.plugin)
-    alias(sharedLibs.plugins.google.services)
     alias(libs.plugins.download.plugin)
     alias(sharedLibs.plugins.c2xConventions)
     de.connect2x.tammy.plugins.flatpak
@@ -39,6 +35,7 @@ if (isRelease)
 val appSuffixedVersion = withVersionSuffix(appVersion)
 val appName = "Tammy"
 val appId = "de.connect2x.tammy"
+val oAuth2ClientUrl = "https://tammy.connect2x.de"
 val privacyInfo = File("website/content/privacy.de-DE.md").readText().substringAfterMarkdownFrontMatter()
 val imprint = File("website/content/imprint.de-DE.md").readText().substringAfterMarkdownFrontMatter()
 
@@ -84,6 +81,7 @@ registerMultiplatformLicensesTasks { licenseTask, target, variant ->
                 override val flavor: Flavor = Flavor.valueOf("$buildFlavor")
                 override val appName: String = "$appName"
                 override val appId: String = "$appId"
+                override val oAuth2ClientUrl: String = "$oAuth2ClientUrl"
                 override val licenses: String = $quotes$licencesString$quotes
                 override val privacyInfo: String = $quotes$privacyInfo$quotes
                 override val imprint: String = $quotes$imprint$quotes
@@ -103,30 +101,28 @@ registerMultiplatformLicensesTasks { licenseTask, target, variant ->
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
-    }
-    jvm("desktop")
-    js("web", IR) {
-        browser {
+    defaultCompilerOptions()
+    withAndroid(minSdk = libs.versions.androidMinSdk)
+    withJvm()
+    withJs {
+        withBrowser {
+            commonWebpackConfig {
+                showProgress = true
+            }
             runTask {
                 mainOutputFileName = "$appId.js"
             }
             webpackTask {
                 mainOutputFileName = "$appId.js"
             }
-            @OptIn(ExperimentalDistributionDsl::class)
-            distribution {
-                outputDirectory.set(distributionDir.map { it.dir("web") })
-            }
         }
         binaries.executable()
+        useEsModules()
     }
-    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach { target ->
-        target.binaries.framework {
+    withIos {
+        binaries.framework {
             export(sharedLibs.essenty.lifecycle)
-            export(libs.trixnity.messenger.view)
+            export(libs.trixnity.messenger.compose.view)
             baseName = "TammyUI"
             isStatic = true
         }
@@ -138,13 +134,16 @@ kotlin {
         }
         commonMain {
             dependencies {
-                api(libs.trixnity.messenger.view)
+                api(libs.trixnity.messenger.compose.view)
                 implementation(libs.trixnity.messenger)
                 implementation(compose.components.resources)
+                implementation(sharedLibs.lognity.core)
+                implementation(sharedLibs.lognity.config)
+                implementation(sharedLibs.lognity.core.config)
             }
             //kotlin.srcDir(buildConfigGenerator.map { it.outputs })
         }
-        val desktopMain by getting {
+        jvmMain {
             dependencies {
                 // this is needed to create lock files working on all machines
                 if (System.getProperty("bundleAll") == "true") {
@@ -156,13 +155,13 @@ kotlin {
                 } else {
                     implementation(compose.desktop.currentOs)
                 }
-                implementation(libs.logback.classic)
                 implementation(sharedLibs.kotlinx.coroutines.swing)
             }
         }
         iosMain {
             dependencies {
                 api(sharedLibs.essenty.lifecycle) // Needed for export as iOS framework
+                implementation(libs.trixnity.messenger.notification.apns)
             }
         }
         androidMain {
@@ -172,13 +171,13 @@ kotlin {
                 implementation(sharedLibs.androidx.work.runtime.ktx)
                 implementation(sharedLibs.androidx.lifecycle.livedata.ktx)
                 implementation(sharedLibs.androidx.activity.compose)
-                implementation(libs.logback.android)
-                implementation(libs.slf4j.api)
                 implementation(sharedLibs.firebase.messaging)
+                implementation(libs.trixnity.messenger.notification.fcm)
+                implementation(libs.trixnity.messenger.notification.unifiedpush)
             }
         }
 
-        val webMain by getting {
+        webMain {
             dependencies {
                 implementation(npm("copy-webpack-plugin", libs.versions.copyWebpackPlugin.get()))
             }
@@ -208,7 +207,7 @@ val distributionJavaHome = System.getenv("DIST_JAVA_HOME") ?: javaToolchains.lau
 compose {
     desktop {
         application {
-            mainClass = "$appId.desktop.MainKt"
+            mainClass = "$appId.Main"
             javaHome = distributionJavaHome
             jvmArgs("-Xmx2G")
 
@@ -279,11 +278,7 @@ android {
     buildFeatures {
         compose = true
     }
-    compileSdk = sharedLibs.versions.androidCompileSDK.get().toInt()
-
     defaultConfig {
-        minSdk = sharedLibs.versions.androidMinimalSDK.get().toInt()
-        targetSdk = sharedLibs.versions.androidTargetSDK.get().toInt()
         versionCode = System.getenv("CI_PIPELINE_IID")?.toInt() ?: 1
         versionName = appSuffixedVersion
         applicationId = appId
@@ -292,11 +287,9 @@ android {
         resValue("string", "scheme", appId)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     base {
         archivesName = appName
     }
-
     signingConfigs {
         create("release") {
             val keystoreFile = file("android_keystore.jks")
