@@ -202,7 +202,7 @@ dependencies {
 }
 
 val distributionJavaHome = System.getenv("DIST_JAVA_HOME") ?: javaToolchains.launcherFor {
-    languageVersion.set(JavaLanguageVersion.of(sharedLibs.versions.distributionJvm.get()))
+    languageVersion.set(JavaLanguageVersion.of(25))
     vendor.set(JvmVendorSpec.JETBRAINS)
 }.get().metadata.installationPath.asFile.absolutePath
 
