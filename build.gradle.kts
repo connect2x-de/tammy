@@ -3,6 +3,7 @@ import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
+import org.gradle.nativeplatform.platform.internal.OperatingSystemInternal
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
@@ -201,10 +202,18 @@ dependencies {
     debugImplementation(sharedLibs.compose.ui.test.android.manifest)
 }
 
-val distributionJavaHome = System.getenv("DIST_JAVA_HOME") ?: javaToolchains.launcherFor {
-    languageVersion.set(JavaLanguageVersion.of(25))
-    vendor.set(JvmVendorSpec.JETBRAINS)
-}.get().metadata.installationPath.asFile.absolutePath
+val distributionJavaHome =
+    if (DefaultNativePlatform.host().operatingSystem.isMacOsX) {
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(24))
+            vendor.set(JvmVendorSpec.ADOPTIUM)
+        }
+    } else {
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(25))
+            vendor.set(JvmVendorSpec.JETBRAINS)
+        }
+    }.get().metadata.installationPath.asFile.absolutePath
 
 compose {
     desktop {
