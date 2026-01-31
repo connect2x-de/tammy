@@ -671,7 +671,7 @@ val webZipDistribution = distributions.first { it.type == "zip" && it.platform =
 
 val packageReleaseWebZip by tasks.registering(Zip::class) {
     group = "compose desktop"
-    from(distributionDir.map { it.dir("web") })
+    from(distributionDir.map { it.dir("js") })
     archiveFileName.set(webZipDistribution.originalFileName)
     destinationDirectory.set(zipDistributionDir)
     dependsOn.add("jsBrowserDistribution")
