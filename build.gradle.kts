@@ -44,6 +44,8 @@ version = appSuffixedVersion
 
 val distributionDir: Provider<Directory> =
     compose.desktop.nativeApplication.distributions.outputBaseDir.map { it.dir("main-release") }
+
+val webDistributionDir: Provider<Directory> = project.layout.buildDirectory.dir("dist")
 val appDistributionDir: Provider<Directory> = distributionDir.map { it.dir("app") }
 
 val os: DefaultOperatingSystem = DefaultNativePlatform.getCurrentOperatingSystem()
@@ -671,7 +673,7 @@ val webZipDistribution = distributions.first { it.type == "zip" && it.platform =
 
 val packageReleaseWebZip by tasks.registering(Zip::class) {
     group = "compose desktop"
-    from(distributionDir.map { it.dir("js") })
+    from(webDistributionDir.map { it.dir("js/productionExecutable") })
     archiveFileName.set(webZipDistribution.originalFileName)
     destinationDirectory.set(zipDistributionDir)
     dependsOn.add("jsBrowserDistribution")
