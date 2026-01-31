@@ -119,6 +119,7 @@ build:web:
     expire_in: 1 day
     paths:
       - "build/compose"
+      - "build/dist"
       - "**/build/**/yarn.lock"
   script:
     - ./gradlew
