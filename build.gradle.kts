@@ -202,18 +202,28 @@ dependencies {
     debugImplementation(sharedLibs.compose.ui.test.android.manifest)
 }
 
-val distributionJavaHome =
-    if (DefaultNativePlatform.host().operatingSystem.isMacOsX) {
+val distributionJavaHome = when {
+    DefaultNativePlatform.host().operatingSystem.isMacOsX -> {
         javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(24))
             vendor.set(JvmVendorSpec.ADOPTIUM)
         }
-    } else {
+    }
+
+    DefaultNativePlatform.host().operatingSystem.isWindows -> {
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(25))
+            vendor.set(JvmVendorSpec.ADOPTIUM)
+        }
+    }
+
+    else -> {
         javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(25))
             vendor.set(JvmVendorSpec.JETBRAINS)
         }
-    }.get().metadata.installationPath.asFile.absolutePath
+    }
+}.get().metadata.installationPath.asFile.absolutePath
 
 compose {
     desktop {
