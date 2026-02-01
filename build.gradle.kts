@@ -213,7 +213,7 @@ val distributionJavaHome = when {
     DefaultNativePlatform.host().operatingSystem.isWindows -> {
         javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(25))
-            vendor.set(JvmVendorSpec.ADOPTIUM)
+            vendor.set(JvmVendorSpec.AZUL)
         }
     }
 
