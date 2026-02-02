@@ -344,19 +344,6 @@ android {
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
         }
     }
-
-    when (buildFlavor) {
-        BuildFlavor.PROD -> {}
-        BuildFlavor.DEV -> {
-            flavorDimensions += "version"
-            productFlavors {
-                create(buildFlavor.name) {
-                    dimension = "version"
-                    applicationIdSuffix = ".dev"
-                    versionNameSuffix = "-DEV"
-                }
-            }
-        }
     }
 }
 
