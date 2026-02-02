@@ -22,6 +22,7 @@ plugins {
     alias(sharedLibs.plugins.aboutLibraries.plugin)
     alias(libs.plugins.download.plugin)
     alias(sharedLibs.plugins.c2xConventions)
+    alias(sharedLibs.plugins.google.services) // TODO simply disable for F-Droid build
     de.connect2x.tammy.plugins.flatpak
 }
 
@@ -343,7 +344,6 @@ android {
             excludes += "META-INF/versions/9/previous-compilation-data.bin"
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
         }
-    }
     }
 }
 
