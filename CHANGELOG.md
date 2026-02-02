@@ -17,9 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix startup crash on windows by changing jvm vendor
-
 ### Security
+
+## 2.0.2
+
+### Fixed
+
+- Fix Android Google Service push keys
+
+## 2.0.1
+
+### Fixed
+
+- Fix startup crash on windows by changing jvm vendor
 
 ## 2.0.0
 
