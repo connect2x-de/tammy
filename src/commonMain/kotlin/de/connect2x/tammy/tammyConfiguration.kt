@@ -16,6 +16,7 @@ fun MatrixMultiMessengerConfiguration.tammyConfiguration(
 ) {
     appName = BuildConfig.appName
     appId = BuildConfig.appId
+    appVersion = BuildConfig.version
     privacyInfo = BuildConfig.privacyInfo
     imprint = BuildConfig.imprint
     licenses = BuildConfig.licenses
