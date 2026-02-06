@@ -17,9 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix version not being shown in About panel
-
 ### Security
+
+## 2.0.3
+
+### Changed
+
+- Upgraded trixnity-messenger to 4.0.3
+
+### Fixed
+
+- Fix version not being shown in About panel
 
 ## 2.0.2
 
