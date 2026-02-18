@@ -1,5 +1,6 @@
 import de.connect2x.conventions.*
 import org.gradle.internal.extensions.stdlib.capitalized
+import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
@@ -22,7 +23,7 @@ plugins {
     alias(sharedLibs.plugins.aboutLibraries.plugin)
     alias(libs.plugins.download.plugin)
     alias(sharedLibs.plugins.c2xConventions)
-    alias(sharedLibs.plugins.google.services) // TODO simply disable for F-Droid build
+    alias(sharedLibs.plugins.google.services)
     de.connect2x.tammy.plugins.flatpak
 }
 
@@ -176,7 +177,6 @@ kotlin {
                 implementation(sharedLibs.androidx.lifecycle.livedata.ktx)
                 implementation(sharedLibs.androidx.activity.compose)
                 implementation(sharedLibs.firebase.messaging)
-                implementation(libs.trixnity.messenger.notification.fcm)
                 implementation(libs.trixnity.messenger.notification.unifiedpush)
             }
         }
@@ -300,6 +300,21 @@ android {
     buildFeatures {
         compose = true
     }
+    productFlavors {
+        flavorDimensions.add("version")
+
+        // This flavor requires the Google Play Services to be available on the target device. Apps built with this
+        // configuration can't be published in F-Droid.
+        register("googlePlay") {
+            dimension = "version"
+        }
+
+        // This flavor removes the requirement of Google Play Services to be available on the target device. Apps built
+        // with this configuration are intented to be published on F-Droid.
+        register("libre") {
+            dimension = "version"
+        }
+    }
     defaultConfig {
         versionCode = System.getenv("CI_PIPELINE_IID")?.toInt() ?: 1
         versionName = appSuffixedVersion
@@ -345,6 +360,13 @@ android {
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
         }
     }
+}
+
+// This MUST be loaded after the Android extension code because "googlePlayImplementation" is available after the
+// Android code was loaded. This inserts the FCM notification provider of Trixnity Messenger into the Google Play
+// product flavor source set.
+dependencies {
+    "googlePlayImplementation"(libs.trixnity.messenger.notification.fcm)
 }
 
 val gitLabProjectUrl =
