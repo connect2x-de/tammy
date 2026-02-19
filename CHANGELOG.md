@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- SDK: Bump kotlin to 2.3.10
+- SDK: Bump compose multiplatform to 1.10.1
+
 ### Deprecated
 
 ### Removed
