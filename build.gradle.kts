@@ -1,9 +1,12 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
 import de.connect2x.conventions.*
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
 import org.gradle.nativeplatform.platform.internal.OperatingSystemInternal
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
@@ -186,10 +189,9 @@ kotlin {
                 implementation(npm("copy-webpack-plugin", libs.versions.copyWebpackPlugin.get()))
             }
         }
-        commonTest {
+        androidInstrumentedTest {
             dependencies {
                 implementation(kotlin("test"))
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.uiTest)
                 implementation(libs.okio.fakefilesystem)
             }

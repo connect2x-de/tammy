@@ -55,14 +55,14 @@ import de.connect2x.trixnity.messenger.viewmodel.verification.VerificationRouter
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.TimeZone
-import net.folivo.trixnity.client.media.PlatformMedia
-import net.folivo.trixnity.core.MSC2448
-import net.folivo.trixnity.core.model.EventId
-import net.folivo.trixnity.core.model.RoomId
-import net.folivo.trixnity.core.model.UserId
-import net.folivo.trixnity.core.model.events.m.Presence
-import net.folivo.trixnity.crypto.key.UserTrustLevel
-import net.folivo.trixnity.utils.nextString
+import de.connect2x.trixnity.client.media.PlatformMedia
+import de.connect2x.trixnity.core.MSC2448
+import de.connect2x.trixnity.core.model.EventId
+import de.connect2x.trixnity.core.model.RoomId
+import de.connect2x.trixnity.core.model.UserId
+import de.connect2x.trixnity.core.model.events.m.Presence
+import de.connect2x.trixnity.crypto.key.UserTrustLevel
+import de.connect2x.trixnity.utils.nextString
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
@@ -168,14 +168,11 @@ fun ScreenshotView(locale: Locale = Locale.ENGLISH, isRoomShown: MutableStateFlo
 
     if (initFinished) {
         val mainViewModel = remember { MockMainViewModel(locale) }
-        LaunchedEffect(isRoomShown) {
-            isRoomShown.collect { mainViewModel.isRoomShown.value = it }
-        }
         CompositionLocalProvider(
             Platform provides PlatformType.ANDROID,
             DI provides di,
-            IsFocused provides true,
             IsFocusHighlighting provides false,
+            EscapeKeyPressed provides flow { },
         ) {
             MessengerTheme {
                 ThemedSurface(
@@ -203,7 +200,6 @@ class MockMainViewModel(
     locale: Locale,
 ) : MainViewModel {
     override val selectedRoomId: MutableStateFlow<RoomId?> = MutableStateFlow(selectedRoom)
-    override val isRoomShown: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     override val avatarCutterRouterStack: Value<ChildStack<AvatarCutterRouter.Config, AvatarCutterRouter.Wrapper>> =
         MutableValue(ChildStack(AvatarCutterRouter.Config.None, AvatarCutterRouter.Wrapper.None))
@@ -233,7 +229,6 @@ class MockMainViewModel(
             )
         )
 
-    override fun closeAccountsOverview() {}
     override fun closeDetailsAndShowList() {}
     override fun onOpenAvatarCutter(userId: UserId, file: FileDescriptor) {}
     override fun onOpenAvatarCutter(userId: UserId, selectedRoomId: RoomId, file: FileDescriptor) {}
@@ -247,7 +242,6 @@ class RoomListViewModelMock(
     locale: Locale,
 ) : RoomListViewModel {
     override val accountViewModel: AccountViewModel = AccountViewModelMock()
-    override val allSyncError: StateFlow<Boolean> = MutableStateFlow(false)
     override val canCreateNewRoomWithAccount: StateFlow<Boolean> = MutableStateFlow(true)
     override val closeProfileNeeded: Boolean = false
     override val error: StateFlow<String?> = MutableStateFlow(null)
@@ -259,7 +253,6 @@ class RoomListViewModelMock(
     override val selectedRoomId: StateFlow<RoomId?> = MutableStateFlow(selectedRoom)
     override val showSearch: MutableStateFlow<Boolean> = MutableStateFlow(false)
     override val searchResultsEmpty: StateFlow<Boolean> = MutableStateFlow(false)
-    override val syncStateError: StateFlow<Map<UserId, Boolean>> = MutableStateFlow(emptyMap())
     override val unverifiedAccounts: StateFlow<List<UserId>> = MutableStateFlow(emptyList())
 
     override val elements: StateFlow<List<RoomListElementViewModel>> = MutableStateFlow(
@@ -396,7 +389,6 @@ class RoomListViewModelMock(
     override fun createNewRoom() {}
     override fun createNewRoomFor(userId: UserId) {}
     override fun errorDismiss() {}
-    override fun openAccountsOverview() {}
     override fun selectRoom(roomId: RoomId) {}
     override fun sendLogs() {}
     override fun verifyAccount(userId: UserId) {}
@@ -419,7 +411,7 @@ class AccountViewModelMock : AccountViewModel {
 
     override fun selectActiveAccount(userId: UserId?) {}
     override fun openUserSettings() {}
-    override fun openUserProfile() {}
+    override fun openUserAccounts() {}
     override fun openAppInfo() {}
 }
 
@@ -456,7 +448,8 @@ class RoomListElementViewModelMock(
     override val roomImageInitials: StateFlow<String?> = MutableStateFlow(inviterUserInfo?.initials ?: "")
     override val roomName: StateFlow<String?> = MutableStateFlow(roomName)
     override val time: StateFlow<String?> = MutableStateFlow(time)
-    override val unreadMessages: StateFlow<String?> = MutableStateFlow(unreadMessages?.toString())
+    override val isUnread: StateFlow<Boolean?> = MutableStateFlow(false)
+    override val notificationCount: StateFlow<String?> = MutableStateFlow(null)
 
     override fun acceptInvitation() {}
     override fun clearError() {}
@@ -476,8 +469,6 @@ class RoomViewModelMock(locale: Locale) : RoomViewModel {
         )
     override val extrasStack: Value<ChildStack<ExtrasRouter.Config, ExtrasRouter.Wrapper>> =
         MutableValue(ChildStack(ExtrasRouter.Config.None, ExtrasRouter.Wrapper.None))
-    override val isShown: StateFlow<Boolean> = MutableStateFlow(false)
-    override val isRoomSettingsShown: StateFlow<Boolean> = MutableStateFlow(false)
 
     override fun closeRoom() {}
     override fun openRoomSettings() {}
@@ -759,6 +750,7 @@ class TimelineElementHolderViewModelMock(
     override val readers: StateFlow<List<UserInfoElement>?> = MutableStateFlow(listOf())
     override val isReplaced: StateFlow<Boolean> = MutableStateFlow(false)
     override val redactionError: StateFlow<String?> = MutableStateFlow(null)
+    override val showRedactionWarning: StateFlow<Boolean> = MutableStateFlow(false)
     override val redactionInProgress: StateFlow<Boolean> = MutableStateFlow(false)
     override val showLoadingIndicatorAfter: StateFlow<Boolean> = MutableStateFlow(false)
     override val showLoadingIndicatorBefore: StateFlow<Boolean> = MutableStateFlow(false)
@@ -794,6 +786,8 @@ class TimelineElementHolderViewModelMock(
     override val sendError: StateFlow<String?> = MutableStateFlow(null)
 
     override fun redact() {}
+    override fun acceptRedactionWarning() {}
+    override fun cancelRedactionWarning() {}
     override fun reply() {}
     override fun endReply() {}
     override fun report() {}
@@ -851,7 +845,7 @@ class ImageMessageViewModelMock(
 
     override fun loadMedia() {}
     override fun cancelLoadMedia() {}
-    override fun downloadMedia(processFile: suspend (PlatformMedia) -> Unit) {}
+    override fun downloadMedia(processFile: suspend (PlatformMedia) -> Unit, onDownloadCancelled: () -> Unit) {}
     override fun cancelDownloadMedia() {}
     override fun openMention(mention: TimelineElementMention) {}
 }
