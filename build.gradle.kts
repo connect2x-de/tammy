@@ -523,17 +523,17 @@ val notarizeReleaseMsix by tasks.registering(Exec::class) {
     executable = "signtool.exe"
     args(
         "sign",
+        "/v",
         "/debug",
-        "/fd", "sha256", // signature digest algorithm
-        "/td", "sha256" // timestamp digest algorithm
+        "/fd", "SHA256",
+        "/tr", "http://timestamp.acs.microsoft.com",
+        "/td", "SHA256",
+        "/dlib", "Azure.CodeSigning.Dlib.dll",
+        "/dmdf", "azure_artifact_signing_metadata.json"
     )
-    System.getenv("WINDOWS_CODE_SIGNING_TIMESTAMP_SERVER")
-        ?.let { args("/tr", it) } // timestamp server
-    System.getenv("WINDOWS_CODE_SIGNING_THUMBPRINT")
-        ?.let { args("/sha1", it) } // key selection
     args(misxDistribution.originalFileName)
     dependsOn(packageReleaseMsix)
-    onlyIf { os.isWindows && isRelease }
+    onlyIf { os.isWindows }
 }
 
 // #####################################################################################################################
