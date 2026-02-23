@@ -13,8 +13,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-default_platform(:android)
-
 platform :android do
     lane :screenshots do
         build_android_app(
@@ -71,6 +69,15 @@ platform :android do
             skip_upload_apk: true,
             aab: "build/outputs/bundle/release/Tammy-release.aab",
             version_code: ENV['CI_PIPELINE_IID']
+        )
+    end
+end
+
+platform :ios do
+    lane :beta do
+        build_app(project: "iosApp/iosApp.xcodeproj",
+                  scheme: "Tammy for iOS",
+                  xcargs: "-allowProvisioningUpdates",
         )
     end
 end

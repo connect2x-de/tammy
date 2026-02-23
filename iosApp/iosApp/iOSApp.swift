@@ -23,7 +23,8 @@ struct iOSApp: App {
                     }
                 }
                 .onOpenURL(perform: { url in
-                    StartMessengerKt.handleUrl(url: url.absoluteString)
+                    // FIXME sooo many changes...
+//                    StartMultiMessengerKt.handleUrl(url: url.absoluteString)
                 })
                 .ignoresSafeArea(.all)
         }
