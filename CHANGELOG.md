@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump kotlin to 2.3.10
 - Bump compose multiplatform to 1.10.1
 - Use Azure Artifact Signing for Windows
+- Bump trixnity-messenger to 4.2.0
 
 ### Deprecated
 

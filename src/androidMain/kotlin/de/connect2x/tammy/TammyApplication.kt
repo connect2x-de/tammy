@@ -22,6 +22,7 @@ class TammyApplication : Application() {
         }
         MatrixMultiMessengerService.configuration = {
             tammyConfiguration()
+            appIcon = "status_icon.png"
             addFcmPushNotificationProvider(
                 pushUrl = "https://sygnal.demo.timmy-messenger.de/_matrix/push/v1/notify",
                 pushAppId = "$appId.fcm",

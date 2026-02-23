@@ -34,6 +34,7 @@ object Main {
         configureLogging()
         startMultiMessenger(args) {
             tammyConfiguration()
+            appIcon = "status_icon.png"
         }
     }
 }
