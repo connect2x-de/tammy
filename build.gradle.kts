@@ -425,7 +425,7 @@ val distributions = listOf(
 val appDescription = "Matrix Messenger Client"
 val misxDistribution = distributions.first { it.type == "msix" && it.platform == "Windows" }
 val publisherName = "connect2x GmbH"
-val publisherCN = "CN=connect2x GmbH, O=connect2x GmbH, L=Dippoldiswalde, S=Saxony, C=DE"
+val publisherCN = "CN=connect2x GmbH, O=connect2x GmbH, L=Dresden, C=DE"
 
 val logoFileName = "logo.png"
 val logo44FileName = "logo_44.png"
