@@ -529,7 +529,7 @@ val notarizeReleaseMsix by tasks.registering(Exec::class) {
         "/tr", "http://timestamp.acs.microsoft.com",
         "/td", "SHA256",
         "/dlib", "C:/MicrosoftArtifactSigningClientTools/Azure.CodeSigning.Dlib.dll",
-        "/dmdf", "azure_artifact_signing_metadata.json"
+        "/dmdf", project.layout.projectDirectory.file("azure_artifact_signing_metadata.json").asFile.absolutePath,
     )
     args(misxDistribution.originalFileName)
     dependsOn(packageReleaseMsix)
