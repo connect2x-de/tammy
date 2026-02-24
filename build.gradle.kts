@@ -213,13 +213,6 @@ val distributionJavaHome = when {
         }
     }
 
-    DefaultNativePlatform.host().operatingSystem.isWindows -> {
-        javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(25))
-            vendor.set(JvmVendorSpec.AZUL)
-        }
-    }
-
     else -> {
         javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(25))
@@ -427,7 +420,7 @@ val distributions = listOf(
 val appDescription = "Matrix Messenger Client"
 val misxDistribution = distributions.first { it.type == "msix" && it.platform == "Windows" }
 val publisherName = "connect2x GmbH"
-val publisherCN = "CN=connect2x GmbH, O=connect2x GmbH, L=Dippoldiswalde, S=Saxony, C=DE"
+val publisherCN = "CN=connect2x GmbH, O=connect2x GmbH, L=Dresden, C=DE"
 
 val logoFileName = "logo.png"
 val logo44FileName = "logo_44.png"
@@ -525,17 +518,17 @@ val notarizeReleaseMsix by tasks.registering(Exec::class) {
     executable = "signtool.exe"
     args(
         "sign",
+        "/v",
         "/debug",
-        "/fd", "sha256", // signature digest algorithm
-        "/td", "sha256" // timestamp digest algorithm
+        "/fd", "SHA256",
+        "/tr", "http://timestamp.acs.microsoft.com",
+        "/td", "SHA256",
+        "/dlib", "C:/MicrosoftArtifactSigningClientTools/Azure.CodeSigning.Dlib.dll",
+        "/dmdf", project.layout.projectDirectory.file("azure_artifact_signing_metadata.json").asFile.absolutePath,
     )
-    System.getenv("WINDOWS_CODE_SIGNING_TIMESTAMP_SERVER")
-        ?.let { args("/tr", it) } // timestamp server
-    System.getenv("WINDOWS_CODE_SIGNING_THUMBPRINT")
-        ?.let { args("/sha1", it) } // key selection
     args(misxDistribution.originalFileName)
     dependsOn(packageReleaseMsix)
-    onlyIf { os.isWindows && isRelease }
+    onlyIf { os.isWindows }
 }
 
 // #####################################################################################################################

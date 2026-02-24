@@ -11,9 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- SDK: Bump kotlin to 2.3.10
-- SDK: Bump compose multiplatform to 1.10.1
-
 ### Deprecated
 
 ### Removed
@@ -21,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 2.0.5
+
+### Changed
+
+- Use Azure Artifact Signing for Windows
+- Bump trixnity-messenger to 4.2.0
 
 ## 2.0.4
 
