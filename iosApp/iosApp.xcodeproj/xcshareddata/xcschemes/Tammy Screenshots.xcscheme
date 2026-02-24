@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07557FD92F4D610C0087B200"
-               BuildableName = "Tammy for iOS copy.app"
-               BlueprintName = "Tammy for iOS copy"
+               BlueprintIdentifier = "077DFD322F4D8BEE00D06695"
+               BuildableName = "Tammy Screenshots.app"
+               BlueprintName = "Tammy Screenshots"
                ReferencedContainer = "container:iosApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,6 +29,19 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "077DFD432F4D8CFC00D06695"
+               BuildableName = "Tammy UITests.xctest"
+               BlueprintName = "Tammy UITests"
+               ReferencedContainer = "container:iosApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -44,21 +57,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B9DA97B02DC1472C00A4DA20"
-            BuildableName = "Tammy.app"
-            BlueprintName = "Tammy for iOS"
+            BlueprintIdentifier = "077DFD322F4D8BEE00D06695"
+            BuildableName = "Tammy Screenshots.app"
+            BlueprintName = "Tammy Screenshots"
             ReferencedContainer = "container:iosApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07557FD92F4D610C0087B200"
-            BuildableName = "Tammy for iOS copy.app"
-            BlueprintName = "Tammy for iOS copy"
-            ReferencedContainer = "container:iosApp.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "SCREENSHOTS"
@@ -77,9 +81,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07557FD92F4D610C0087B200"
-            BuildableName = "Tammy for iOS copy.app"
-            BlueprintName = "Tammy for iOS copy"
+            BlueprintIdentifier = "077DFD322F4D8BEE00D06695"
+            BuildableName = "Tammy Screenshots.app"
+            BlueprintName = "Tammy Screenshots"
             ReferencedContainer = "container:iosApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

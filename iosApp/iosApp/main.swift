@@ -8,4 +8,7 @@ if let value = ProcessInfo.processInfo.environment["SCREENSHOTS"] {
     } else {
         try MainKt.main(args: CommandLine.arguments)
     }
+} else {
+    try MainKt.main(args: CommandLine.arguments)
 }
+ 

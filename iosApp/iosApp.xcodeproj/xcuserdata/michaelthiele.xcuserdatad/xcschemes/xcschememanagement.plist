@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Tammy for iOS copy.xcscheme_^#shared#^_</key>
+		<key>Tammy Screenshots.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -18,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>07557FD92F4D610C0087B200</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>077DFD322F4D8BEE00D06695</key>
 		<dict>
 			<key>primary</key>
 			<true />

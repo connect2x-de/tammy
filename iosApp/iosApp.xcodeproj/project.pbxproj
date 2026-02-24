@@ -6,23 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		077DFD4A2F4D8CFD00D06695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9DA97A92DC1472C00A4DA20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 077DFD322F4D8BEE00D06695;
+			remoteInfo = "Tammy Screenshots";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		07557FE12F4D610C0087B200 /* Tammy for iOS copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tammy for iOS copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		07557FE32F4D610C0087B200 /* Tammy for iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tammy for iOS copy-Info.plist"; path = "/Users/michaelthiele/repos/tammy/iosApp/Tammy for iOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		07557FE32F4D610C0087B200 /* Tammy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tammy-Info.plist"; path = "/Users/michaelthiele/repos/tammy/iosApp/Tammy-Info.plist"; sourceTree = "<absolute>"; };
+		077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tammy Screenshots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		077DFD3C2F4D8BEE00D06695 /* Tammy for iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tammy for iOS copy-Info.plist"; path = "/Users/michaelthiele/repos/tammy/iosApp/Tammy for iOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tammy UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tammy for iOS.entitlements"; sourceTree = "<group>"; };
 		B9DA97B12DC1472C00A4DA20 /* Tammy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tammy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		07557FE22F4D610C0087B200 /* Exceptions for "iosApp" folder in "Tammy for iOS copy" target */ = {
+		077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Assets.xcassets,
 				Info.plist,
-				lognity.json,
-				main.swift,
 			);
-			target = 07557FD92F4D610C0087B200 /* Tammy for iOS copy */;
+			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
 		};
 		B99700CA2DC9B8D800C7335B /* Exceptions for "iosApp" folder in "Tammy for iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -34,11 +43,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		077DFD452F4D8CFD00D06695 /* Tammy UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Tammy UITests";
+			sourceTree = "<group>";
+		};
 		B9DA97B32DC1472C00A4DA20 /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				B99700CA2DC9B8D800C7335B /* Exceptions for "iosApp" folder in "Tammy for iOS" target */,
-				07557FE22F4D610C0087B200 /* Exceptions for "iosApp" folder in "Tammy for iOS copy" target */,
+				077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -51,7 +65,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07557FDC2F4D610C0087B200 /* Frameworks */ = {
+		077DFD352F4D8BEE00D06695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		077DFD412F4D8CFC00D06695 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,7 +95,9 @@
 				4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */,
 				B9DA98002DC14AA900A4DA20 /* Configuration */,
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
-				07557FE32F4D610C0087B200 /* Tammy for iOS copy-Info.plist */,
+				07557FE32F4D610C0087B200 /* Tammy-Info.plist */,
+				077DFD3C2F4D8BEE00D06695 /* Tammy for iOS copy-Info.plist */,
+				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
 				B9DA97B22DC1472C00A4DA20 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,7 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				B9DA97B12DC1472C00A4DA20 /* Tammy.app */,
-				07557FE12F4D610C0087B200 /* Tammy for iOS copy.app */,
+				077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */,
+				077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,14 +115,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		07557FD92F4D610C0087B200 /* Tammy for iOS copy */ = {
+		077DFD322F4D8BEE00D06695 /* Tammy Screenshots */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07557FDE2F4D610C0087B200 /* Build configuration list for PBXNativeTarget "Tammy for iOS copy" */;
+			buildConfigurationList = 077DFD372F4D8BEE00D06695 /* Build configuration list for PBXNativeTarget "Tammy Screenshots" */;
 			buildPhases = (
-				07557FDA2F4D610C0087B200 /* ShellScript */,
-				07557FDB2F4D610C0087B200 /* Sources */,
-				07557FDC2F4D610C0087B200 /* Frameworks */,
-				07557FDD2F4D610C0087B200 /* Resources */,
+				077DFD332F4D8BEE00D06695 /* ShellScript */,
+				077DFD342F4D8BEE00D06695 /* Sources */,
+				077DFD352F4D8BEE00D06695 /* Frameworks */,
+				077DFD362F4D8BEE00D06695 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -107,12 +131,35 @@
 			fileSystemSynchronizedGroups = (
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
 			);
-			name = "Tammy for iOS copy";
+			name = "Tammy Screenshots";
 			packageProductDependencies = (
 			);
 			productName = iosApp;
-			productReference = 07557FE12F4D610C0087B200 /* Tammy for iOS copy.app */;
+			productReference = 077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */;
 			productType = "com.apple.product-type.application";
+		};
+		077DFD432F4D8CFC00D06695 /* Tammy UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 077DFD4C2F4D8CFD00D06695 /* Build configuration list for PBXNativeTarget "Tammy UITests" */;
+			buildPhases = (
+				077DFD402F4D8CFC00D06695 /* Sources */,
+				077DFD412F4D8CFC00D06695 /* Frameworks */,
+				077DFD422F4D8CFC00D06695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				077DFD4B2F4D8CFD00D06695 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
+			);
+			name = "Tammy UITests";
+			packageProductDependencies = (
+			);
+			productName = "Tammy UITests";
+			productReference = 077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		B9DA97B02DC1472C00A4DA20 /* Tammy for iOS */ = {
 			isa = PBXNativeTarget;
@@ -147,6 +194,10 @@
 				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					077DFD432F4D8CFC00D06695 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 077DFD322F4D8BEE00D06695;
+					};
 					B9DA97B02DC1472C00A4DA20 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -167,13 +218,21 @@
 			projectRoot = "";
 			targets = (
 				B9DA97B02DC1472C00A4DA20 /* Tammy for iOS */,
-				07557FD92F4D610C0087B200 /* Tammy for iOS copy */,
+				077DFD322F4D8BEE00D06695 /* Tammy Screenshots */,
+				077DFD432F4D8CFC00D06695 /* Tammy UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		07557FDD2F4D610C0087B200 /* Resources */ = {
+		077DFD362F4D8BEE00D06695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		077DFD422F4D8CFC00D06695 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -190,7 +249,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07557FDA2F4D610C0087B200 /* ShellScript */ = {
+		077DFD332F4D8BEE00D06695 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -221,7 +280,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		07557FDB2F4D610C0087B200 /* Sources */ = {
+		077DFD342F4D8BEE00D06695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		077DFD402F4D8CFC00D06695 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -237,8 +303,16 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		077DFD4B2F4D8CFD00D06695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
+			targetProxy = 077DFD4A2F4D8CFD00D06695 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		07557FDF2F4D610C0087B200 /* Debug */ = {
+		077DFD382F4D8BEE00D06695 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
@@ -271,7 +345,7 @@
 				);
 				MARKETING_VERSION = 1.1.22;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy.testdata;
+				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -284,7 +358,7 @@
 			};
 			name = Debug;
 		};
-		07557FE02F4D610C0087B200 /* Release */ = {
+		077DFD392F4D8BEE00D06695 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
@@ -317,7 +391,6 @@
 				);
 				MARKETING_VERSION = 1.1.22;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy.testdata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -326,6 +399,50 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		077DFD4D2F4D8CFD00D06695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C6CHAMK5QZ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.connect2x.Tammy-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tammy Screenshots";
+			};
+			name = Debug;
+		};
+		077DFD4E2F4D8CFD00D06695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C6CHAMK5QZ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.connect2x.Tammy-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tammy Screenshots";
 			};
 			name = Release;
 		};
@@ -540,11 +657,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07557FDE2F4D610C0087B200 /* Build configuration list for PBXNativeTarget "Tammy for iOS copy" */ = {
+		077DFD372F4D8BEE00D06695 /* Build configuration list for PBXNativeTarget "Tammy Screenshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				07557FDF2F4D610C0087B200 /* Debug */,
-				07557FE02F4D610C0087B200 /* Release */,
+				077DFD382F4D8BEE00D06695 /* Debug */,
+				077DFD392F4D8BEE00D06695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		077DFD4C2F4D8CFD00D06695 /* Build configuration list for PBXNativeTarget "Tammy UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				077DFD4D2F4D8CFD00D06695 /* Debug */,
+				077DFD4E2F4D8CFD00D06695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
