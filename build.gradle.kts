@@ -176,7 +176,6 @@ kotlin {
                 implementation(sharedLibs.androidx.work.runtime.ktx)
                 implementation(sharedLibs.androidx.lifecycle.livedata.ktx)
                 implementation(sharedLibs.androidx.activity.compose)
-                implementation(sharedLibs.firebase.messaging)
                 implementation(libs.trixnity.messenger.notification.unifiedpush)
             }
         }
@@ -367,6 +366,7 @@ android {
 // product flavor source set.
 dependencies {
     "googlePlayImplementation"(libs.trixnity.messenger.notification.fcm)
+    "googlePlayImplementation"(sharedLibs.firebase.messaging)
 }
 
 val gitLabProjectUrl =
