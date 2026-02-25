@@ -6,6 +6,25 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		077DFD712F4D9FD800D06695 /* boardgame.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD612F4D9FBB00D06695 /* boardgame.png */; };
+		077DFD722F4D9FD800D06695 /* family.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD622F4D9FBB00D06695 /* family.png */; };
+		077DFD732F4D9FD800D06695 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD632F4D9FBB00D06695 /* logo.png */; };
+		077DFD742F4D9FD800D06695 /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD642F4D9FBB00D06695 /* movie.png */; };
+		077DFD752F4D9FD800D06695 /* strawberrycake.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD652F4D9FBB00D06695 /* strawberrycake.png */; };
+		077DFD762F4D9FD800D06695 /* user1.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD662F4D9FBB00D06695 /* user1.png */; };
+		077DFD772F4D9FD800D06695 /* user2.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD672F4D9FBB00D06695 /* user2.png */; };
+		077DFD782F4D9FD800D06695 /* user3.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD682F4D9FBB00D06695 /* user3.png */; };
+		077DFD792F4D9FD800D06695 /* user4.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD692F4D9FBB00D06695 /* user4.png */; };
+		077DFD7A2F4D9FD800D06695 /* user5.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6A2F4D9FBB00D06695 /* user5.png */; };
+		077DFD7B2F4D9FD800D06695 /* user6.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6B2F4D9FBB00D06695 /* user6.png */; };
+		077DFD7C2F4D9FD800D06695 /* user7.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6C2F4D9FBB00D06695 /* user7.png */; };
+		077DFD7D2F4D9FD800D06695 /* user8.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6D2F4D9FBB00D06695 /* user8.png */; };
+		077DFD7E2F4D9FD800D06695 /* user9.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6E2F4D9FBB00D06695 /* user9.png */; };
+		077DFD7F2F4D9FD800D06695 /* user10.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6F2F4D9FBB00D06695 /* user10.png */; };
+		077DFD802F4D9FD800D06695 /* user11.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD702F4D9FBB00D06695 /* user11.png */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		077DFD4A2F4D8CFD00D06695 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -17,10 +36,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07557FE32F4D610C0087B200 /* Tammy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tammy-Info.plist"; path = "/Users/michaelthiele/repos/tammy/iosApp/Tammy-Info.plist"; sourceTree = "<absolute>"; };
 		077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tammy Screenshots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		077DFD3C2F4D8BEE00D06695 /* Tammy for iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tammy for iOS copy-Info.plist"; path = "/Users/michaelthiele/repos/tammy/iosApp/Tammy for iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tammy UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		077DFD612F4D9FBB00D06695 /* boardgame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boardgame.png; sourceTree = "<group>"; };
+		077DFD622F4D9FBB00D06695 /* family.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family.png; sourceTree = "<group>"; };
+		077DFD632F4D9FBB00D06695 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		077DFD642F4D9FBB00D06695 /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie.png; sourceTree = "<group>"; };
+		077DFD652F4D9FBB00D06695 /* strawberrycake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberrycake.png; sourceTree = "<group>"; };
+		077DFD662F4D9FBB00D06695 /* user1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user1.png; sourceTree = "<group>"; };
+		077DFD672F4D9FBB00D06695 /* user2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user2.png; sourceTree = "<group>"; };
+		077DFD682F4D9FBB00D06695 /* user3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user3.png; sourceTree = "<group>"; };
+		077DFD692F4D9FBB00D06695 /* user4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user4.png; sourceTree = "<group>"; };
+		077DFD6A2F4D9FBB00D06695 /* user5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user5.png; sourceTree = "<group>"; };
+		077DFD6B2F4D9FBB00D06695 /* user6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user6.png; sourceTree = "<group>"; };
+		077DFD6C2F4D9FBB00D06695 /* user7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user7.png; sourceTree = "<group>"; };
+		077DFD6D2F4D9FBB00D06695 /* user8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user8.png; sourceTree = "<group>"; };
+		077DFD6E2F4D9FBB00D06695 /* user9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user9.png; sourceTree = "<group>"; };
+		077DFD6F2F4D9FBB00D06695 /* user10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user10.png; sourceTree = "<group>"; };
+		077DFD702F4D9FBB00D06695 /* user11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user11.png; sourceTree = "<group>"; };
 		4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tammy for iOS.entitlements"; sourceTree = "<group>"; };
 		B9DA97B12DC1472C00A4DA20 /* Tammy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tammy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,14 +123,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		077DFD602F4D9FB300D06695 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				077DFD612F4D9FBB00D06695 /* boardgame.png */,
+				077DFD622F4D9FBB00D06695 /* family.png */,
+				077DFD632F4D9FBB00D06695 /* logo.png */,
+				077DFD642F4D9FBB00D06695 /* movie.png */,
+				077DFD652F4D9FBB00D06695 /* strawberrycake.png */,
+				077DFD662F4D9FBB00D06695 /* user1.png */,
+				077DFD672F4D9FBB00D06695 /* user2.png */,
+				077DFD682F4D9FBB00D06695 /* user3.png */,
+				077DFD692F4D9FBB00D06695 /* user4.png */,
+				077DFD6A2F4D9FBB00D06695 /* user5.png */,
+				077DFD6B2F4D9FBB00D06695 /* user6.png */,
+				077DFD6C2F4D9FBB00D06695 /* user7.png */,
+				077DFD6D2F4D9FBB00D06695 /* user8.png */,
+				077DFD6E2F4D9FBB00D06695 /* user9.png */,
+				077DFD6F2F4D9FBB00D06695 /* user10.png */,
+				077DFD702F4D9FBB00D06695 /* user11.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		B9DA97A82DC1472C00A4DA20 = {
 			isa = PBXGroup;
 			children = (
 				4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */,
 				B9DA98002DC14AA900A4DA20 /* Configuration */,
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
-				07557FE32F4D610C0087B200 /* Tammy-Info.plist */,
 				077DFD3C2F4D8BEE00D06695 /* Tammy for iOS copy-Info.plist */,
+				077DFD602F4D9FB300D06695 /* Screenshots */,
 				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
 				B9DA97B22DC1472C00A4DA20 /* Products */,
 			);
@@ -229,6 +286,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077DFD712F4D9FD800D06695 /* boardgame.png in Resources */,
+				077DFD722F4D9FD800D06695 /* family.png in Resources */,
+				077DFD732F4D9FD800D06695 /* logo.png in Resources */,
+				077DFD742F4D9FD800D06695 /* movie.png in Resources */,
+				077DFD752F4D9FD800D06695 /* strawberrycake.png in Resources */,
+				077DFD762F4D9FD800D06695 /* user1.png in Resources */,
+				077DFD772F4D9FD800D06695 /* user2.png in Resources */,
+				077DFD782F4D9FD800D06695 /* user3.png in Resources */,
+				077DFD792F4D9FD800D06695 /* user4.png in Resources */,
+				077DFD7A2F4D9FD800D06695 /* user5.png in Resources */,
+				077DFD7B2F4D9FD800D06695 /* user6.png in Resources */,
+				077DFD7C2F4D9FD800D06695 /* user7.png in Resources */,
+				077DFD7D2F4D9FD800D06695 /* user8.png in Resources */,
+				077DFD7E2F4D9FD800D06695 /* user9.png in Resources */,
+				077DFD7F2F4D9FD800D06695 /* user10.png in Resources */,
+				077DFD802F4D9FD800D06695 /* user11.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +418,7 @@
 				);
 				MARKETING_VERSION = 1.1.22;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy;
+				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy.testdata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -391,6 +464,7 @@
 				);
 				MARKETING_VERSION = 1.1.22;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy.testdata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

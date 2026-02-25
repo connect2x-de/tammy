@@ -147,6 +147,7 @@ kotlin {
                 implementation(sharedLibs.lognity.core)
                 implementation(sharedLibs.lognity.config)
                 implementation(sharedLibs.lognity.core.config)
+                implementation(libs.okio.fakefilesystem) // for iOS, shared code needs to be located here
             }
             //kotlin.srcDir(buildConfigGenerator.map { it.outputs })
         }
@@ -189,12 +190,16 @@ kotlin {
                 implementation(npm("copy-webpack-plugin", libs.versions.copyWebpackPlugin.get()))
             }
         }
-        androidInstrumentedTest {
+
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(compose.uiTest)
-                implementation(libs.okio.fakefilesystem)
+
             }
+        }
+        androidInstrumentedTest {
+            dependsOn(commonTest.get())
         }
     }
 }

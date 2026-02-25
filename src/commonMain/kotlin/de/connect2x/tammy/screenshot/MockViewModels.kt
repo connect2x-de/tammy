@@ -1,44 +1,37 @@
-package de.conenct2x.tammy
+package de.connect2x.tammy.screenshot
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.runComposeUiTest
-import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import de.connect2x.trixnity.messenger.compose.view.*
-import de.connect2x.trixnity.messenger.compose.view.root.Main
-import de.connect2x.trixnity.messenger.compose.view.theme.IsFocusHighlighting
-import de.connect2x.trixnity.messenger.compose.view.theme.MessengerTheme
-import de.connect2x.trixnity.messenger.compose.view.theme.components
-import de.connect2x.trixnity.messenger.compose.view.theme.components.ThemedSurface
-import de.connect2x.tammy.tammyThemeModule
-import de.connect2x.trixnity.messenger.MatrixMessengerConfiguration
-import de.connect2x.trixnity.messenger.MatrixMessengerSettingsHolder
-import de.connect2x.trixnity.messenger.i18n.DefaultLanguages
-import de.connect2x.trixnity.messenger.i18n.I18n
-import de.connect2x.trixnity.messenger.i18n.Languages
-import de.connect2x.trixnity.messenger.i18n.platformGetSystemLangModule
-import de.connect2x.trixnity.messenger.platformMatrixMessengerSettingsHolderModule
+import de.connect2x.trixnity.client.media.PlatformMedia
+import de.connect2x.trixnity.core.MSC2448
+import de.connect2x.trixnity.core.model.EventId
+import de.connect2x.trixnity.core.model.RoomId
+import de.connect2x.trixnity.core.model.UserId
+import de.connect2x.trixnity.core.model.events.m.Presence
+import de.connect2x.trixnity.crypto.key.UserTrustLevel
 import de.connect2x.trixnity.messenger.util.FileDescriptor
 import de.connect2x.trixnity.messenger.util.FileTransferProgressElement
-import de.connect2x.trixnity.messenger.util.RootPath
-import de.connect2x.trixnity.messenger.util.UriCaller
 import de.connect2x.trixnity.messenger.util.html.HtmlNode
-import de.connect2x.trixnity.messenger.viewmodel.*
+import de.connect2x.trixnity.messenger.viewmodel.AccountInfo
+import de.connect2x.trixnity.messenger.viewmodel.MainViewModel
+import de.connect2x.trixnity.messenger.viewmodel.TextFieldViewModel
+import de.connect2x.trixnity.messenger.viewmodel.TextFieldViewModelImpl
+import de.connect2x.trixnity.messenger.viewmodel.UserInfoElement
 import de.connect2x.trixnity.messenger.viewmodel.initialsync.InitialSyncRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.settings.ExtrasRouter
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.*
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.*
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.InputAreaViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.RoomHeaderInfo
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.RoomHeaderViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.TimelineRouter
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.TimelineViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.BaseTimelineElementHolderViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.ReportMessageRouter
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementHolderViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementMention
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.message.RoomMessageTimelineElementViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.AccountViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.RoomListElementViewModel
@@ -52,147 +45,14 @@ import de.connect2x.trixnity.messenger.viewmodel.util.EventReaction
 import de.connect2x.trixnity.messenger.viewmodel.util.EventReactions
 import de.connect2x.trixnity.messenger.viewmodel.verification.SelfVerificationRouter
 import de.connect2x.trixnity.messenger.viewmodel.verification.VerificationRouter
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.TimeZone
-import de.connect2x.trixnity.client.media.PlatformMedia
-import de.connect2x.trixnity.core.MSC2448
-import de.connect2x.trixnity.core.model.EventId
-import de.connect2x.trixnity.core.model.RoomId
-import de.connect2x.trixnity.core.model.UserId
-import de.connect2x.trixnity.core.model.events.m.Presence
-import de.connect2x.trixnity.crypto.key.UserTrustLevel
 import de.connect2x.trixnity.utils.nextString
-import okio.FileSystem
-import okio.Path.Companion.toPath
-import okio.fakefilesystem.FakeFileSystem
-import org.junit.Rule
-import org.koin.dsl.koinApplication
-import org.koin.dsl.module
-import tools.fastlane.screengrab.Screengrab
-import tools.fastlane.screengrab.cleanstatusbar.BluetoothState
-import tools.fastlane.screengrab.cleanstatusbar.CleanStatusBar
-import tools.fastlane.screengrab.cleanstatusbar.IconVisibility
-import tools.fastlane.screengrab.cleanstatusbar.MobileDataType
-import tools.fastlane.screengrab.locale.LocaleTestRule
-import tools.fastlane.screengrab.locale.LocaleUtil
-import java.util.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlin.random.Random
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-
-@OptIn(ExperimentalTestApi::class)
-class TimmyClientTest {
-
-    @Rule
-    @JvmField
-    val localeTestRule = LocaleTestRule()
-
-    @BeforeTest
-    fun before() {
-        CleanStatusBar()
-            .setBluetoothState(BluetoothState.DISCONNECTED)
-            .setMobileNetworkDataType(MobileDataType.LTE)
-            .setWifiVisibility(IconVisibility.HIDE)
-            .setShowNotifications(false)
-            .setClock("0900")
-            .setBatteryLevel(100)
-            .enable()
-    }
-
-    @AfterTest
-    fun after() {
-        CleanStatusBar.disable()
-    }
-
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
-    fun timmyScreen() = runTest {
-        runComposeUiTest {
-            val isRoomShown = MutableStateFlow(false)
-            setContent {
-                ScreenshotView(
-                    LocaleUtil.localeFromString(
-                        (LocaleUtil.getTestLocale() ?: "en-US").substringBefore("-")
-                    ), isRoomShown
-                )
-            }
-            isRoomShown.value = false
-            waitForIdle()
-            Thread.sleep(5000)
-            Screengrab.screenshot("room_list")
-            isRoomShown.value = true
-            waitForIdle()
-            Thread.sleep(5000)
-            Screengrab.screenshot("room")
-        }
-    }
-}
-
-@Composable
-fun ScreenshotView(locale: Locale = Locale.ENGLISH, isRoomShown: MutableStateFlow<Boolean> = MutableStateFlow(false)) {
-    var initFinished by remember { mutableStateOf(true) }
-
-    val di = remember {
-        koinApplication {
-            modules(
-                // TODO this needs to be removed and fixed, as there is no MatrixMessengerSettingsHolderImpl at MultiMessenger level!
-                platformMatrixMessengerSettingsHolderModule(),
-                // TODO there should be a more clean way for I18n
-                platformGetSystemLangModule(),
-                module {
-                    single<Languages> { DefaultLanguages }
-                    single<I18n> { object : I18n(get(), get(), get(), get()) {} }
-                    single<TimeZone> { TimeZone.UTC }
-                    single<FileSystem> { FakeFileSystem() }
-                    single<RootPath> {
-                        RootPath("/app".toPath())
-                    }
-                    single<MatrixMessengerConfiguration> {
-                        MatrixMessengerConfiguration()
-                    }
-                    single<UriCaller> {
-                        UriCaller { _, _ -> }
-                    }
-                },
-                composeViewModule(MatrixMessengerConfiguration()),
-                tammyThemeModule(),
-            )
-        }.koin
-    }
-    LaunchedEffect(Unit) {
-        di.get<MatrixMessengerSettingsHolder>().init()
-        initFinished = true
-    }
-
-    if (initFinished) {
-        val mainViewModel = remember { MockMainViewModel(locale) }
-        CompositionLocalProvider(
-            Platform provides PlatformType.ANDROID,
-            DI provides di,
-            IsFocusHighlighting provides false,
-            EscapeKeyPressed provides flow { },
-        ) {
-            MessengerTheme {
-                ThemedSurface(
-                    style = MaterialTheme.components.background,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .safeDrawingPadding()
-                ) {
-                    Main(mainViewModel)
-                }
-            }
-        }
-    } else Text("loading")
-}
-
-@Preview
-@Composable
-fun ScreenshotViewPreview() {
-    ScreenshotView()
-}
 
 val selectedRoom = RoomId("!selected")
 
@@ -264,7 +124,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Tommy",
-                roomImage = resource("user1.png"),
+                roomImage = PlatformResource.resource("user1.png"),
                 time = "19:59",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Great :-)",
@@ -276,7 +136,7 @@ class RoomListViewModelMock(
                     Locale.ENGLISH to "Mommy",
                     Locale.GERMAN to "Mama",
                 )[locale] ?: "???",
-                roomImage = resource("user2.png"),
+                roomImage = PlatformResource.resource("user2.png"),
                 time = "17:44",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Thank you honey.",
@@ -285,14 +145,14 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Bob",
-                roomImage = resource("user3.png"),
+                roomImage = PlatformResource.resource("user3.png"),
                 time = "17:10",
                 lastMessage = "🥰",
                 unreadMessages = 3
             ),
             RoomListElementViewModelMock(
                 roomName = "Frank",
-                roomImage = resource("user4.png"),
+                roomImage = PlatformResource.resource("user4.png"),
                 time = "16:52",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Then let's just try it out ☺️",
@@ -304,7 +164,7 @@ class RoomListViewModelMock(
                     Locale.ENGLISH to "Board Games Night",
                     Locale.GERMAN to "Brettspielnacht",
                 )[locale] ?: "???",
-                roomImage = resource("boardgame.png"),
+                roomImage = PlatformResource.resource("boardgame.png"),
                 time = "16:44",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "You: Alright, see you next week at the latest!",
@@ -317,7 +177,7 @@ class RoomListViewModelMock(
                     Locale.ENGLISH to "Family",
                     Locale.GERMAN to "Familie",
                 )[locale] ?: "???",
-                roomImage = resource("family.png"),
+                roomImage = PlatformResource.resource("family.png"),
                 time = "11:30",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Michael: That was fun!",
@@ -327,7 +187,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Luna",
-                roomImage = resource("user5.png"),
+                roomImage = PlatformResource.resource("user5.png"),
                 time = "11:12",
                 lastMessage = "Sent an image."
             ),
@@ -336,7 +196,7 @@ class RoomListViewModelMock(
                     Locale.ENGLISH to "Movie Maniacs",
                     Locale.GERMAN to "Filmfans",
                 )[locale] ?: "???",
-                roomImage = resource("movie.png"),
+                roomImage = PlatformResource.resource("movie.png"),
                 time = "11:11",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Benedict: Best movie ever 👍",
@@ -348,7 +208,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Lilly",
-                roomImage = resource("user6.png"),
+                roomImage = PlatformResource.resource("user6.png"),
                 time = "07:16",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Oh yeah. I understand...",
@@ -357,7 +217,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Nina",
-                roomImage = resource("user7.png"),
+                roomImage = PlatformResource.resource("user7.png"),
                 time = "12.06.2024",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Until then 🎸",
@@ -366,7 +226,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Bruno",
-                roomImage = resource("user8.png"),
+                roomImage = PlatformResource.resource("user8.png"),
                 time = "12.06.2024",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "I like that idea 😀",
@@ -375,7 +235,7 @@ class RoomListViewModelMock(
             ),
             RoomListElementViewModelMock(
                 roomName = "Felicitas",
-                roomImage = resource("user11.png"),
+                roomImage = PlatformResource.resource("user11.png"),
                 time = "13.06.2024",
                 lastMessage = mapOf(
                     Locale.ENGLISH to "Have a nice week!",
@@ -402,7 +262,7 @@ class AccountViewModelMock : AccountViewModel {
                 displayName = "Tammy",
                 displayColor = null,
                 initials = "T",
-                avatar = resource("logo.png"),
+                avatar = PlatformResource.resource("logo.png"),
             )
         )
     )
@@ -573,7 +433,7 @@ class TimelineViewModelMock(
                 TimelineElementHolderViewModelMock(
                     sender = UserInfoElement(UserId("michael", "server"), "Michael", "M"),
                     element = ImageMessageViewModelMock(
-                        resource("strawberrycake.png"), caption = mapOf(
+                        PlatformResource.resource("strawberrycake.png"), caption = mapOf(
                             Locale.ENGLISH to "Great, then I'll bring my famous strawberry cake again.",
                             Locale.GERMAN to "Gut, dann bringe ich wieder meinen berühmten Erdbeerkuchen mit.",
                         )[locale] ?: "???", 1024, 1024
@@ -654,6 +514,8 @@ class TimelineViewModelMock(
             )
         )
     override val viewState: MutableStateFlow<TimelineViewModel.ViewState?> = MutableStateFlow(null)
+    override val canLoadBefore: StateFlow<Boolean?> = MutableStateFlow(false)
+    override val canLoadAfter: StateFlow<Boolean?> = MutableStateFlow(false)
     override val scrollTo: Flow<String> = elements.map { it.last().key }
 
     override fun errorDismiss() {}
@@ -685,7 +547,7 @@ class RoomHeaderViewModelMock(locale: Locale) : RoomHeaderViewModel {
                 Locale.GERMAN to "Organisation unserer monatlichen Brettspielnacht",
             )[locale] ?: "???",
             roomImageInitials = "BG",
-            roomImage = resource("boardgame.png"),
+            roomImage = PlatformResource.resource("boardgame.png"),
             presence = null,
             isEncrypted = true,
             isPublic = false,
@@ -849,5 +711,3 @@ class ImageMessageViewModelMock(
     override fun cancelDownloadMedia() {}
     override fun openMention(mention: TimelineElementMention) {}
 }
-
-fun resource(path: String): ByteArray? = object {}.javaClass.classLoader?.getResource(path)?.readBytes()
