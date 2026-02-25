@@ -14,6 +14,7 @@ pluginManagement {
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositories {
+        mavenLocal()
         maven("https://gitlab.com/api/v4/projects/68438621/packages/maven") // c2x Conventions
         maven("https://gitlab.com/api/v4/projects/26519650/packages/maven") // trixnity
         maven("https://gitlab.com/api/v4/projects/47538655/packages/maven") // trixnity-messenger
