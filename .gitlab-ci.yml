@@ -13,9 +13,6 @@ stages:
 
 variables:
   GRADLE_OPTS: -Dorg.gradle.daemon=false
-  GRADLE_USER_HOME: $CI_PROJECT_DIR/.gradle
-  KONAN_DATA_DIR: $CI_PROJECT_DIR/.konan
-  KOTLIN_DATA_DIR: $CI_PROJECT_DIR/.kotlin
   BUILD_LINUX_IMAGE_NAME_BASE: registry.gitlab.com/connect2x/build-infrastructure/kmp-dockerfiles/kmp-dockerfiles-base:latest
   BUILD_LINUX_IMAGE_NAME_PACKAGE: registry.gitlab.com/connect2x/build-infrastructure/kmp-dockerfiles/kmp-dockerfiles-package:latest
   BUILD_LINUX_IMAGE_NAME_FASTLANE: registry.gitlab.com/connect2x/build-infrastructure/kmp-dockerfiles/kmp-dockerfiles-fastlane:latest
@@ -30,19 +27,6 @@ variables:
   - if: $CI_PIPELINE_SOURCE == "schedule"
     when: never
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-.cache: &cache
-  - key:
-      files:
-        - gradle/wrapper/gradle-wrapper.properties
-        - gradle/libs.versions.toml
-    paths:
-      - $GRADLE_USER_HOME/wrapper
-      - $GRADLE_USER_HOME/nodejs
-      - $GRADLE_USER_HOME/yarn
-      - $GRADLE_USER_HOME/native
-      - $KONAN_DATA_DIR
-      - $KOTLIN_DATA_DIR
 
 changelog:
   stage: changelog
@@ -66,7 +50,6 @@ build:android:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_BASE
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -89,7 +72,6 @@ build:linux-x64:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_PACKAGE
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -109,7 +91,6 @@ build:web:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_BASE
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -130,7 +111,6 @@ build:windows-x64:
   stage: build
   interruptible: true
   tags: [ "connect2x-win" ]
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -149,7 +129,6 @@ build:macos-x64:
   stage: build
   interruptible: true
   tags: [ "connect2x-mac" ]
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -176,7 +155,6 @@ build:macos-arm64:
   timeout: 30m
   variables:
     HOMEBREW_NO_AUTO_UPDATE: 1
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -203,7 +181,6 @@ build:macos-arm64:
 #  interruptible: true
 #  tags: [ "connect2x-macos" ]
 #  timeout: 40m
-#  cache: *cache
 #  rules:
 #    - *if-main
 #    - *if-release
@@ -227,7 +204,6 @@ build:prepare-website:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_BASE
-  cache: *cache
   rules:
     - *if-main
     - *if-release
@@ -310,7 +286,6 @@ release:playstore-beta:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_FASTLANE
-  cache: *cache
   rules:
     - *if-main
   artifacts:
@@ -331,7 +306,6 @@ release:playstore:
   interruptible: true
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_FASTLANE
-  cache: *cache
   rules:
     - *if-release
   artifacts:
@@ -348,7 +322,6 @@ release:gitlab:
   stage: release
   tags: [ "connect2x-linux" ]
   image: $BUILD_LINUX_IMAGE_NAME_BASE
-  cache: *cache
   rules:
     - *if-release
   script:
