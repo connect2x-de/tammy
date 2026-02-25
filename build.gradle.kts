@@ -4,15 +4,20 @@ import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
-import org.gradle.nativeplatform.platform.internal.OperatingSystemInternal
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
+import java.io.BufferedReader
+import java.io.ByteArrayOutputStream
+import java.io.InputStreamReader
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 
 
 plugins {
@@ -360,6 +365,31 @@ android {
 dependencies {
     "googlePlayImplementation"(libs.trixnity.messenger.notification.fcm)
     "googlePlayImplementation"(sharedLibs.firebase.messaging)
+}
+
+tasks.register("scanAndroidLibreForNonFreeClasses", Exec::class) {
+    group = "verification"
+    description = "Scanning the libre APK for non-free components like Google Services"
+    dependsOn("assembleLibreDebug")
+
+    val file = layout.buildDirectory.file("outputs/apk/libre/debug/Tammy-libre-debug.apk")
+    inputs.file(file).withPropertyName("apkFile")
+    commandLine("fdroid", "scanner", file.get().asFile.absolutePath, "-v")
+
+    val outputStream = ByteArrayOutputStream()
+    errorOutput = outputStream
+    doLast {
+        val problemClasses = outputStream.toByteArray().toString(Charsets.UTF_8).split("\n")
+            .filter { it.contains("Problem: found class") }
+            .map { it.split(": ")[2].replace("found class ", "") }
+        if (problemClasses.isNotEmpty()) {
+            problemClasses.forEach {
+                println("Found problem in $it")
+            }
+
+            throw GradleException("F-Droid scanner found ${problemClasses.size} problems")
+        }
+    }
 }
 
 val gitLabProjectUrl =
