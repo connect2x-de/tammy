@@ -13,25 +13,13 @@ import de.connect2x.trixnity.crypto.key.UserTrustLevel
 import de.connect2x.trixnity.messenger.util.FileDescriptor
 import de.connect2x.trixnity.messenger.util.FileTransferProgressElement
 import de.connect2x.trixnity.messenger.util.html.HtmlNode
-import de.connect2x.trixnity.messenger.viewmodel.AccountInfo
-import de.connect2x.trixnity.messenger.viewmodel.MainViewModel
-import de.connect2x.trixnity.messenger.viewmodel.TextFieldViewModel
-import de.connect2x.trixnity.messenger.viewmodel.TextFieldViewModelImpl
-import de.connect2x.trixnity.messenger.viewmodel.UserInfoElement
+import de.connect2x.trixnity.messenger.viewmodel.*
 import de.connect2x.trixnity.messenger.viewmodel.initialsync.InitialSyncRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.settings.ExtrasRouter
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.InputAreaViewModel
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.RoomHeaderInfo
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.RoomHeaderViewModel
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.TimelineRouter
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.TimelineViewModel
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.BaseTimelineElementHolderViewModel
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.ReportMessageRouter
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementHolderViewModel
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementMention
-import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.TimelineElementViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.*
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.*
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.message.RoomMessageTimelineElementViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.AccountViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.RoomListElementViewModel
@@ -46,19 +34,21 @@ import de.connect2x.trixnity.messenger.viewmodel.util.EventReactions
 import de.connect2x.trixnity.messenger.viewmodel.verification.SelfVerificationRouter
 import de.connect2x.trixnity.messenger.viewmodel.verification.VerificationRouter
 import de.connect2x.trixnity.utils.nextString
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 val selectedRoom = RoomId("!selected")
 
 class MockMainViewModel(
     locale: Locale,
+    showRoom: MutableStateFlow<Boolean>,
 ) : MainViewModel {
+    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
     override val selectedRoomId: MutableStateFlow<RoomId?> = MutableStateFlow(selectedRoom)
 
     override val avatarCutterRouterStack: Value<ChildStack<AvatarCutterRouter.Config, AvatarCutterRouter.Wrapper>> =
@@ -81,13 +71,26 @@ class MockMainViewModel(
                 RoomListRouter.Wrapper.List(RoomListViewModelMock(locale))
             )
         )
-    override val roomRouterStack: Value<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>> =
-        MutableValue(
-            ChildStack(
-                RoomRouter.Config.View(UserId("tammy", "server"), selectedRoom.full),
-                RoomRouter.Wrapper.View(RoomViewModelMock(locale))
-            )
-        )
+
+    val room: MutableValue<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>> =
+        MutableValue(ChildStack(RoomRouter.Config.None, RoomRouter.Wrapper.None))
+
+    init {
+        coroutineScope.launch {
+            showRoom.collect {
+                if (it) {
+                    room.value = ChildStack(
+                        RoomRouter.Config.View(UserId("tammy", "server"), selectedRoom.full),
+                        RoomRouter.Wrapper.View(RoomViewModelMock(locale))
+                    )
+                } else {
+                    ChildStack(RoomRouter.Config.None, RoomRouter.Wrapper.None)
+                }
+            }
+        }
+    }
+
+    override val roomRouterStack: Value<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>> = room
 
     override fun closeDetailsAndShowList() {}
     override fun onOpenAvatarCutter(userId: UserId, file: FileDescriptor) {}

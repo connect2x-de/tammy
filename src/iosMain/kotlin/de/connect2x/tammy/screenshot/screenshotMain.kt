@@ -10,6 +10,7 @@ import de.connect2x.trixnity.messenger.compose.view.ViewControllerFactory
 import de.connect2x.trixnity.messenger.compose.view.startMultiMessenger
 import de.connect2x.trixnity.messenger.notification.apns.addApnsPushNotificationProvider
 import de.connect2x.trixnity.messenger.util.toByteArray
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.io.Buffer
 import org.koin.dsl.module
 import platform.Foundation.NSBundle
@@ -17,7 +18,7 @@ import platform.Foundation.NSData
 import platform.Foundation.dataWithContentsOfFile
 
 @Throws(IllegalStateException::class)
-fun screenshotMain(args: List<String>) {
+fun screenshotMain(args: List<String>, showRoom: MutableStateFlow<Boolean>) {
     val bundle = NSBundle.mainBundle
     val path = bundle.pathForResource("lognity", "json") ?: error("Unable to locate logger config")
     val data = NSData.dataWithContentsOfFile(path)?.toByteArray() ?: error("Unable to read logger config")
@@ -26,8 +27,6 @@ fun screenshotMain(args: List<String>) {
     SerializableConfig uses CoreConfigExtension
     Backend.setDefaultConfig(Buffer().also { it.write(data) })
 
-
-
     try {
         startMultiMessenger(args) {
             tammyConfiguration {
@@ -35,16 +34,12 @@ fun screenshotMain(args: List<String>) {
                     module {
                         single<ViewControllerFactory> {
                             ViewControllerFactory {
-                                ScreenshotMessengerViewController(it)
+                                ScreenshotMessengerViewController(it, showRoom)
                             }
                         }
                     }
                 }
             }
-            addApnsPushNotificationProvider(
-                pushUrl = "https://sygnal.demo.timmy-messenger.de/_matrix/push/v1/notify",
-                pushAppId = "$appId.apns",
-            )
         }
     } catch (t: Throwable) {
         throw IllegalStateException(t)

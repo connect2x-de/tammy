@@ -32,6 +32,7 @@ import de.connect2x.trixnity.messenger.i18n.platformGetSystemLangModule
 import de.connect2x.trixnity.messenger.platformMatrixMessengerSettingsHolderModule
 import de.connect2x.trixnity.messenger.util.RootPath
 import de.connect2x.trixnity.messenger.util.UriCaller
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.TimeZone
 import okio.FileSystem
@@ -42,7 +43,7 @@ import org.koin.dsl.module
 
 // FIXME go to room is missing (isRoomShown is no longer available on mainViewModel)
 @Composable
-fun ScreenshotView(locale: Locale) {
+fun ScreenshotView(locale: Locale, showRoom: MutableStateFlow<Boolean>) {
     var initFinished by remember { mutableStateOf(true) }
 
     val di = remember {
@@ -78,7 +79,7 @@ fun ScreenshotView(locale: Locale) {
     }
 
     if (initFinished) {
-        val mainViewModel = remember { MockMainViewModel(locale) }
+        val mainViewModel = remember { MockMainViewModel(locale, showRoom) }
         CompositionLocalProvider(
             Platform provides PlatformType.ANDROID,
             DI provides di,

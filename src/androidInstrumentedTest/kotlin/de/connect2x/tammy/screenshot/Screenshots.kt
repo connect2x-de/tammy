@@ -47,20 +47,21 @@ class TimmyClientTest {
     @Test
     fun timmyScreen() = runTest {
         runComposeUiTest {
-            val isRoomShown = MutableStateFlow(false)
+            val showRoom = MutableStateFlow(false)
             setContent {
                 ScreenshotView(
                     when ((LocaleUtil.getTestLocale() ?: "en-US").substringBefore("-")) {
                         "de" -> Locale.GERMAN
                         else -> Locale.ENGLISH
-                    }
+                    },
+                    showRoom,
                 )
             }
-            isRoomShown.value = false
+            showRoom.value = false
             waitForIdle()
             Thread.sleep(5000)
             Screengrab.screenshot("room_list")
-            isRoomShown.value = true
+            showRoom.value = true
             waitForIdle()
             Thread.sleep(5000)
             Screengrab.screenshot("room")
