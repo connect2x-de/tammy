@@ -11,7 +11,6 @@
 		077DFD722F4D9FD800D06695 /* family.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD622F4D9FBB00D06695 /* family.png */; };
 		077DFD732F4D9FD800D06695 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD632F4D9FBB00D06695 /* logo.png */; };
 		077DFD742F4D9FD800D06695 /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD642F4D9FBB00D06695 /* movie.png */; };
-		077DFD752F4D9FD800D06695 /* strawberrycake.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD652F4D9FBB00D06695 /* strawberrycake.png */; };
 		077DFD762F4D9FD800D06695 /* user1.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD662F4D9FBB00D06695 /* user1.png */; };
 		077DFD772F4D9FD800D06695 /* user2.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD672F4D9FBB00D06695 /* user2.png */; };
 		077DFD782F4D9FD800D06695 /* user3.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD682F4D9FBB00D06695 /* user3.png */; };
@@ -23,6 +22,7 @@
 		077DFD7E2F4D9FD800D06695 /* user9.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6E2F4D9FBB00D06695 /* user9.png */; };
 		077DFD7F2F4D9FD800D06695 /* user10.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6F2F4D9FBB00D06695 /* user10.png */; };
 		077DFD802F4D9FD800D06695 /* user11.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD702F4D9FBB00D06695 /* user11.png */; };
+		077DFD842F5000FE00D06695 /* strawberrycake.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD652F4D9FBB00D06695 /* strawberrycake.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +63,7 @@
 		077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
 				Info.plist,
 			);
 			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
@@ -76,6 +77,16 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		077DFD862F50010400D06695 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 077DFD362F4D8BEE00D06695 /* Resources */;
+			membershipExceptions = (
+				main.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		077DFD452F4D8CFD00D06695 /* Tammy UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -87,6 +98,7 @@
 			exceptions = (
 				B99700CA2DC9B8D800C7335B /* Exceptions for "iosApp" folder in "Tammy for iOS" target */,
 				077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */,
+				077DFD862F50010400D06695 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -130,7 +142,6 @@
 				077DFD622F4D9FBB00D06695 /* family.png */,
 				077DFD632F4D9FBB00D06695 /* logo.png */,
 				077DFD642F4D9FBB00D06695 /* movie.png */,
-				077DFD652F4D9FBB00D06695 /* strawberrycake.png */,
 				077DFD662F4D9FBB00D06695 /* user1.png */,
 				077DFD672F4D9FBB00D06695 /* user2.png */,
 				077DFD682F4D9FBB00D06695 /* user3.png */,
@@ -142,6 +153,7 @@
 				077DFD6E2F4D9FBB00D06695 /* user9.png */,
 				077DFD6F2F4D9FBB00D06695 /* user10.png */,
 				077DFD702F4D9FBB00D06695 /* user11.png */,
+				077DFD652F4D9FBB00D06695 /* strawberrycake.png */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -286,11 +298,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077DFD842F5000FE00D06695 /* strawberrycake.png in Resources */,
 				077DFD712F4D9FD800D06695 /* boardgame.png in Resources */,
 				077DFD722F4D9FD800D06695 /* family.png in Resources */,
 				077DFD732F4D9FD800D06695 /* logo.png in Resources */,
 				077DFD742F4D9FD800D06695 /* movie.png in Resources */,
-				077DFD752F4D9FD800D06695 /* strawberrycake.png in Resources */,
 				077DFD762F4D9FD800D06695 /* user1.png in Resources */,
 				077DFD772F4D9FD800D06695 /* user2.png in Resources */,
 				077DFD782F4D9FD800D06695 /* user3.png in Resources */,
