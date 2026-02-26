@@ -64,14 +64,6 @@ class MockMainViewModel(
     override val sharingStack: Value<ChildStack<SharingRouter.Config, SharingRouter.Wrapper>> =
         MutableValue(ChildStack(SharingRouter.Config.None, SharingRouter.Wrapper.None))
 
-    override val roomListRouterStack: Value<ChildStack<RoomListRouter.Config, RoomListRouter.Wrapper>> =
-        MutableValue(
-            ChildStack(
-                RoomListRouter.Config.RoomList,
-                RoomListRouter.Wrapper.List(RoomListViewModelMock(locale))
-            )
-        )
-
     val room: MutableValue<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>> =
         MutableValue(ChildStack(RoomRouter.Config.None, RoomRouter.Wrapper.None))
 
@@ -90,6 +82,14 @@ class MockMainViewModel(
         }
     }
 
+    override val roomListRouterStack: Value<ChildStack<RoomListRouter.Config, RoomListRouter.Wrapper>> =
+        MutableValue(
+            ChildStack(
+                RoomListRouter.Config.RoomList,
+                RoomListRouter.Wrapper.List(RoomListViewModelMock(locale, room))
+            )
+        )
+
     override val roomRouterStack: Value<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>> = room
 
     override fun closeDetailsAndShowList() {}
@@ -102,7 +102,8 @@ class MockMainViewModel(
 }
 
 class RoomListViewModelMock(
-    locale: Locale,
+    private val locale: Locale,
+    private val room: MutableValue<ChildStack<RoomRouter.Config, RoomRouter.Wrapper>>,
 ) : RoomListViewModel {
     override val accountViewModel: AccountViewModel = AccountViewModelMock()
     override val canCreateNewRoomWithAccount: StateFlow<Boolean> = MutableStateFlow(true)
@@ -252,7 +253,13 @@ class RoomListViewModelMock(
     override fun createNewRoom() {}
     override fun createNewRoomFor(userId: UserId) {}
     override fun errorDismiss() {}
-    override fun selectRoom(roomId: RoomId) {}
+    // this trick is needed for iOS UITesting where we cannot directly manipulate the showRoom variable
+    override fun selectRoom(roomId: RoomId) {
+        room.value = ChildStack(
+            RoomRouter.Config.View(UserId("tammy", "server"), selectedRoom.full),
+            RoomRouter.Wrapper.View(RoomViewModelMock(locale))
+        )
+    }
     override fun sendLogs() {}
     override fun verifyAccount(userId: UserId) {}
 }

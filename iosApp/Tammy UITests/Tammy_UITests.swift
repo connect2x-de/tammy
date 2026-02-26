@@ -25,18 +25,17 @@ final class Tammy_UITests: XCTestCase {
     @MainActor
     func testExample() throws {
         // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+        let app = XCUIApplication(bundleIdentifier: "de.connect2x.tammy.testdata")
+        app.launchEnvironment["SCREENSHOTS"] = "YES"
+        print("--- SCREENSHOTS ---")
+        setupSnapshot(app)
+        app.activate()
+        let bob = app.buttons/*@START_MENU_TOKEN@*/.containing(.staticText, identifier: "Bob").firstMatch/*[[".element(boundBy: 20)",".containing(.staticText, identifier: \"🥰\").firstMatch",".containing(.staticText, identifier: \"Bob\").firstMatch",".containing(.staticText, identifier: \"17:10\").firstMatch"],[[[-1,3],[-1,2],[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        _ = bob.waitForExistence(timeout: 5.0)
+        snapshot("RoomList")
+        bob.tap()
         
         
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
     }
 }

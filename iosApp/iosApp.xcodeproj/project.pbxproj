@@ -33,6 +33,13 @@
 			remoteGlobalIDString = 077DFD322F4D8BEE00D06695;
 			remoteInfo = "Tammy Screenshots";
 		};
+		0799099A2F5016CE001E897B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9DA97A92DC1472C00A4DA20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9DA97B02DC1472C00A4DA20;
+			remoteInfo = "Tammy for iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -219,6 +226,7 @@
 			);
 			dependencies = (
 				077DFD4B2F4D8CFD00D06695 /* PBXTargetDependency */,
+				0799099B2F5016CE001E897B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
@@ -393,6 +401,11 @@
 			isa = PBXTargetDependency;
 			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
 			targetProxy = 077DFD4A2F4D8CFD00D06695 /* PBXContainerItemProxy */;
+		};
+		0799099B2F5016CE001E897B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9DA97B02DC1472C00A4DA20 /* Tammy for iOS */;
+			targetProxy = 0799099A2F5016CE001E897B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
