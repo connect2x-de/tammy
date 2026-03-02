@@ -32,9 +32,9 @@ download:
   android:
     title: Android
     store: PlayStore
-    playservices:
-      with: with Play Services
-      without: without Play Services
+    flavor:
+      googlePlay: with Play Services
+      libre: without Play Services
     apk: APK
     aab: AAB
   ios:
