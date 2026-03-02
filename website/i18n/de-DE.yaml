@@ -32,6 +32,7 @@ download:
   android:
     title: Android
     store: PlayStore
+    libre: PlayStore freie
     apk: APK
     abb: ABB
   ios:

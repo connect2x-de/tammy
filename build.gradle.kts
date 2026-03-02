@@ -412,13 +412,23 @@ data class Distribution(
 
 val distributions = listOf(
     Distribution(
-        "aab", "Android", "universal",
-        listOf("bundleRelease"),
+        "Aab", "Android", "GooglePlay",
+        listOf("bundleGooglePlayRelease"),
         "$appName-release.aab"
     ),
     Distribution(
-        "apk", "Android", "universal",
-        listOf("assembleRelease"),
+        "Apk", "Android", "GooglePlay",
+        listOf("assembleGooglePlayRelease"),
+        "$appName-release.apk"
+    ),
+    Distribution(
+        "Aab", "Android", "Libre",
+        listOf("bundleLibreRelease"),
+        "$appName-release.aab"
+    ),
+    Distribution(
+        "Apk", "Android", "Libre",
+        listOf("assembleLibreRelease"),
         "$appName-release.apk"
     ),
     Distribution(
