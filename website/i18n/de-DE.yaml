@@ -32,7 +32,9 @@ download:
   android:
     title: Android
     store: PlayStore
-    libre: PlayStore freie
+    playservices:
+      with: mit Play Services
+      without: ohne Play Services
     apk: APK
     abb: ABB
   ios:
