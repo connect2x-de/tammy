@@ -34,8 +34,8 @@ final class Tammy_UITests: XCTestCase {
         _ = bob.waitForExistence(timeout: 5.0)
         snapshot("RoomList")
         bob.tap()
-        
-        
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let send = app/*@START_MENU_TOKEN@*/.images["send"]/*[[".buttons[\"send\"].images",".buttons.images[\"send\"]",".images[\"send\"]"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch
+        _ = send.waitForExistence(timeout: 5.0)
+        snapshot("Room")
     }
 }
