@@ -53,6 +53,7 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				Info.plist,
+				lognity.json,
 			);
 			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
 		};
@@ -65,19 +66,11 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		077DFD862F50010400D06695 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 077DFD362F4D8BEE00D06695 /* Resources */;
-			membershipExceptions = (
-				main.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		077DFD452F4D8CFD00D06695 /* Tammy UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = "Tammy UITests";
 			sourceTree = "<group>";
 		};
@@ -86,13 +79,14 @@
 			exceptions = (
 				B99700CA2DC9B8D800C7335B /* Exceptions for "iosApp" folder in "Tammy for iOS" target */,
 				077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */,
-				077DFD862F50010400D06695 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
 		};
 		B9DA98002DC14AA900A4DA20 /* Configuration */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = Configuration;
 			sourceTree = "<group>";
 		};
@@ -189,8 +183,6 @@
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
 			);
 			name = "Tammy Screenshots";
-			packageProductDependencies = (
-			);
 			productName = iosApp;
 			productReference = 077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */;
 			productType = "com.apple.product-type.application";
@@ -213,8 +205,6 @@
 				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
 			);
 			name = "Tammy UITests";
-			packageProductDependencies = (
-			);
 			productName = "Tammy UITests";
 			productReference = 077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -236,8 +226,6 @@
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
 			);
 			name = "Tammy for iOS";
-			packageProductDependencies = (
-			);
 			productName = iosApp;
 			productReference = B9DA97B12DC1472C00A4DA20 /* Tammy.app */;
 			productType = "com.apple.product-type.application";
@@ -639,7 +627,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = C6CHAMK5QZ;
 				ENABLE_PREVIEWS = YES;
@@ -684,9 +672,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Tammy for iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C6CHAMK5QZ;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -708,6 +696,7 @@
 				);
 				MARKETING_VERSION = 1.1.22;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.connect2x.tammy;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
