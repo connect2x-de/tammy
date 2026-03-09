@@ -76,7 +76,12 @@ end
 platform :ios do
     lane :beta do
         install_provisioning_profile(path: "tammy.mobileprovision")
-        disable_automatic_code_signing(path: "iosApp/iosApp.xcodeproj")
+        update_code_signing_settings(
+          use_automatic_signing: false,
+          path: "iosApp/iosApp.xcodeproj",
+          team_id: "C6CHAMK5QZ",
+          bundle_identifier: "de.connect2x.tammy",
+        )
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
@@ -86,7 +91,12 @@ platform :ios do
                     }
                   }
         )
-        enable_automatic_code_signing(path: "iosApp/iosApp.xcodeproj")
+        update_code_signing_settings(
+                  use_automatic_signing: true,
+                  path: "iosApp/iosApp.xcodeproj",
+                  team_id: "C6CHAMK5QZ",
+                  bundle_identifier: "de.connect2x.tammy",
+                )
         upload_to_testflight
     end
 end
