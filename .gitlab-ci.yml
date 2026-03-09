@@ -322,6 +322,7 @@ release:ios-arm64:
   stage: release
   interruptible: true
   tags: [ "saas-macos-medium-m1" ]
+  image: "macos-26-xcode-26"
   timeout: 40m
 #  rules:
 #    - *if-merge-request # FIXME only for testing
