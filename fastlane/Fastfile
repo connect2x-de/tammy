@@ -78,7 +78,7 @@ platform :ios do
         install_provisioning_profile(path: "tammy.mobileprovision")
         import_certificate(
             certificate_path: "dist.cer",
-            keychain_path: "apple_keychain.keychain",
+            keychain_name: "apple_keychain.keychain",
         )
         update_code_signing_settings(
           use_automatic_signing: false,
