@@ -76,6 +76,9 @@ end
 platform :ios do
     lane :beta do
         install_provisioning_profile(path: "tammy.mobileprovision")
+        import_certificate(
+            certificate_path: "dist.cer"
+        )
         update_code_signing_settings(
           use_automatic_signing: false,
           path: "iosApp/iosApp.xcodeproj",
