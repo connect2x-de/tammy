@@ -83,15 +83,9 @@ platform :ios do
           bundle_identifier: "de.connect2x.tammy",
           targets: "Tammy for iOS",
         )
-        gym(project: "iosApp/iosApp.xcodeproj",
+        build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
-                  export_options: {
-                    provisioningProfiles: {
-                        "de.connect2x.tammy" => "connect2x Tammy dist"
-                    },
-                    signingStyle: "manual",
-                  }
         )
         update_code_signing_settings(
                   use_automatic_signing: true,
