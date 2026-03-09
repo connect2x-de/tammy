@@ -79,6 +79,7 @@ platform :ios do
         import_certificate(
             certificate_path: "dist.cer",
             keychain_name: "apple_keychain.keychain",
+            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
         )
         update_code_signing_settings(
           use_automatic_signing: false,
