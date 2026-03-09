@@ -75,11 +75,18 @@ end
 
 platform :ios do
     lane :beta do
-        # FIXME we need to import a custom keychain: see https://docs.fastlane.tools/actions/unlock_keychain/
+        install_provisioning_profile(path: "tammy.mobileprovision")
+        disable_automatic_code_signing(path: "iosApp/iosApp.xcodeproj")
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
-                  xcargs: "-allowProvisioningUpdates",
+                  export_method: "app-store",
+                  export_options: {
+                    provisioningProfiles: {
+                        "de.connect2x.tammy" => "connect2x Tammy dist"
+                    }
+                  }
         )
+        enable_automatic_code_signing(path: "iosApp/iosApp.xcodeproj")
         upload_to_testflight
     end
 end
