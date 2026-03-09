@@ -321,7 +321,7 @@ variables:
 release:ios-arm64:
   stage: release
   interruptible: true
-  tags: [ "connect2x-mac" ]
+  tags: [ "saas-macos-medium-m1" ]
   timeout: 40m
 #  rules:
 #    - *if-merge-request # FIXME only for testing
