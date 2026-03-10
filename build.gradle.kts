@@ -114,7 +114,7 @@ kotlin {
     defaultCompilerOptions()
     withAndroid(minSdk = libs.versions.androidMinSdk)
     withJvm()
-    withJs {
+    withWeb {
         withBrowser {
             commonWebpackConfig {
                 showProgress = true
@@ -734,10 +734,10 @@ val webZipDistribution = distributions.first { it.type == "zip" && it.platform =
 
 val packageReleaseWebZip by tasks.registering(Zip::class) {
     group = "compose desktop"
-    from(webDistributionDir.map { it.dir("js/productionExecutable") })
+    from(webDistributionDir.map { it.dir("composeWebCompatibility/productionExecutable") })
     archiveFileName.set(webZipDistribution.originalFileName)
     destinationDirectory.set(zipDistributionDir)
-    dependsOn.add("jsBrowserDistribution")
+    dependsOn.add("composeCompatibilityBrowserDistribution")
 }
 
 val uploadWebZipDistributable by tasks.registering {
