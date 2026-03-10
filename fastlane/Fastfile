@@ -73,6 +73,7 @@ platform :android do
     end
 end
 
+# https://stackoverflow.com/a/51027545
 platform :ios do
     lane :beta do
         install_provisioning_profile(path: "tammy.mobileprovision")
@@ -91,12 +92,13 @@ platform :ios do
             password: ENV['APPLE_KEYCHAIN_PASSWORD'],
             set_default: true,
         )
+        sh("security find-identity -v -p codesigning")
         update_code_signing_settings(
-          use_automatic_signing: false,
-          path: "iosApp/iosApp.xcodeproj",
-          team_id: "C6CHAMK5QZ",
-          bundle_identifier: "de.connect2x.tammy",
-          targets: "Tammy for iOS",
+            use_automatic_signing: false,
+            path: "iosApp/iosApp.xcodeproj",
+            team_id: "C6CHAMK5QZ",
+            bundle_identifier: "de.connect2x.tammy",
+            targets: "Tammy for iOS",
         )
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
