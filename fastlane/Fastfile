@@ -76,50 +76,54 @@ end
 # https://stackoverflow.com/a/51027545
 platform :ios do
     lane :beta do
-        install_provisioning_profile(path: "tammy.mobileprovision")
-        import_certificate(
-            certificate_path: "dev.cer",
-            keychain_name: "apple_keychain.keychain",
-            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
-        )
-        import_certificate(
-            certificate_path: "dev.p12",
-            keychain_name: "apple_keychain.keychain",
-            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
-        )
-        import_certificate(
-            certificate_path: "dist.cer",
-            keychain_name: "apple_keychain.keychain",
-            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
-        )
-        import_certificate(
-            certificate_path: "dist.p12",
-            keychain_name: "apple_keychain.keychain",
-            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
-        )
-        unlock_keychain(
-            path: "apple_keychain.keychain",
-            password: ENV['APPLE_KEYCHAIN_PASSWORD'],
-            set_default: true,
+#         install_provisioning_profile(path: "tammy.mobileprovision")
+#         import_certificate(
+#             certificate_path: "dev.cer",
+#             keychain_name: "apple_keychain.keychain",
+#             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+#         )
+#         import_certificate(
+#             certificate_path: "dev.p12",
+#             keychain_name: "apple_keychain.keychain",
+#             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+#         )
+#         import_certificate(
+#             certificate_path: "dist.cer",
+#             keychain_name: "apple_keychain.keychain",
+#             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+#         )
+#         import_certificate(
+#             certificate_path: "dist.p12",
+#             keychain_name: "apple_keychain.keychain",
+#             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+#         )
+#         unlock_keychain(
+#             path: "apple_keychain.keychain",
+#             password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+#             set_default: true,
+#         )
+        sync_code_signing(
+            type: "appstore",
+            readonly: true,
         )
         sh("security find-identity -v -p codesigning")
-        update_code_signing_settings(
-            use_automatic_signing: false,
-            path: "iosApp/iosApp.xcodeproj",
-            team_id: "C6CHAMK5QZ",
-            bundle_identifier: "de.connect2x.tammy",
-            targets: "Tammy for iOS",
-        )
+#         update_code_signing_settings(
+#             use_automatic_signing: false,
+#             path: "iosApp/iosApp.xcodeproj",
+#             team_id: "C6CHAMK5QZ",
+#             bundle_identifier: "de.connect2x.tammy",
+#             targets: "Tammy for iOS",
+#         )
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
         )
-        update_code_signing_settings(
-                  use_automatic_signing: true,
-                  path: "iosApp/iosApp.xcodeproj",
-                  team_id: "C6CHAMK5QZ",
-                  bundle_identifier: "de.connect2x.tammy",
-        )
+#         update_code_signing_settings(
+#                   use_automatic_signing: true,
+#                   path: "iosApp/iosApp.xcodeproj",
+#                   team_id: "C6CHAMK5QZ",
+#                   bundle_identifier: "de.connect2x.tammy",
+#         )
         upload_to_testflight
     end
 end
