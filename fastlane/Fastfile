@@ -105,6 +105,8 @@ platform :ios do
         sync_code_signing(
             type: "appstore",
             readonly: true,
+            git_branch: "main",
+            clone_branch_directly: true,
         )
         sh("security find-identity -v -p codesigning")
 #         update_code_signing_settings(
