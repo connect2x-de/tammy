@@ -340,11 +340,11 @@ release:ios-arm64:
     - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
     - echo $APPLE_MOBILE_PROVISION | base64 --decode > tammy.mobileprovision
     - echo $APPLE_DISTRIBUTION_CERT_BASE64 | base64 --decode > dist.cer
+    - echo APPLE_DISTRIBUTION_PK_BASE64 | base64 --decode > dist.p12
     - brew install fastlane
     - xcodebuild -version # might help to identify differences in local and remote XCode versions
   script:
     - fastlane ios beta
-    - security find-identity -p codesigning -v # find certificate
 
 #release:gitlab:
 #  stage: release
