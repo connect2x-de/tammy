@@ -1,6 +1,10 @@
 CI_JOB_TOKEN = ENV["CI_JOB_TOKEN"]
 git_url("https://gitlab-ci-token:" + CI_JOB_TOKEN + "@gitlab.com/connect2x/build-infrastructure/ios-distribution-match.git")
 
+#git_url("git@gitlab.com:connect2x/build-infrastructure/ios-distribution-match.git")
+
+git_branch("main")
+
 storage_mode("git")
 
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development

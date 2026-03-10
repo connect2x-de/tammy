@@ -119,6 +119,7 @@ platform :ios do
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
+                  configuration: "Release",
         )
 #         update_code_signing_settings(
 #                   use_automatic_signing: true,
