@@ -344,6 +344,7 @@ release:ios-arm64:
     - xcodebuild -version # might help to identify differences in local and remote XCode versions
   script:
     - fastlane ios beta
+    - security find-identity -p codesigning -v # find certificate
 
 #release:gitlab:
 #  stage: release
