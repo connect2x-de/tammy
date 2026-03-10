@@ -81,6 +81,11 @@ platform :ios do
             keychain_name: "apple_keychain.keychain",
             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
         )
+        unlock_keychain(
+            path: "apple_keychain.keychain",
+            password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+            set_default: true,
+        )
         update_code_signing_settings(
           use_automatic_signing: false,
           path: "iosApp/iosApp.xcodeproj",

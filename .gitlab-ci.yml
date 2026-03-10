@@ -338,7 +338,6 @@ release:ios-arm64:
     - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
     - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
     - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
-    - echo "$(realpath apple_keychain.keychain)"
     - echo $APPLE_MOBILE_PROVISION | base64 --decode > tammy.mobileprovision
     - echo $APPLE_DISTRIBUTION_CERT_BASE64 | base64 --decode > dist.cer
     - brew install fastlane
