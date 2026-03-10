@@ -78,6 +78,16 @@ platform :ios do
     lane :beta do
         install_provisioning_profile(path: "tammy.mobileprovision")
         import_certificate(
+            certificate_path: "dev.cer",
+            keychain_name: "apple_keychain.keychain",
+            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+        )
+        import_certificate(
+            certificate_path: "dev.p12",
+            keychain_name: "apple_keychain.keychain",
+            keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
+        )
+        import_certificate(
             certificate_path: "dist.cer",
             keychain_name: "apple_keychain.keychain",
             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
