@@ -103,7 +103,7 @@ platform :ios do
                   configuration: "Release",
         )
         upload_to_testflight(
-            api_key_path: "api_key_info.json",
+            api_key_path: "fastlane/api_key_info.json",
             skip_submission: true,
         )
     end
