@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add publishing on F-Droid
+- Support for Kotlin/WasmJs
 
 ### Changed
 
