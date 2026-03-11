@@ -108,7 +108,6 @@ platform :ios do
             git_branch: "main",
             clone_branch_directly: true,
         )
-        sh("security find-identity -v -p codesigning")
 #         update_code_signing_settings(
 #             use_automatic_signing: false,
 #             path: "iosApp/iosApp.xcodeproj",
@@ -116,6 +115,17 @@ platform :ios do
 #             bundle_identifier: "de.connect2x.tammy",
 #             targets: "Tammy for iOS",
 #         )
+        # This should not be necessary, but fastlane does want to use a Development Certificate
+        update_code_signing_settings(
+              use_automatic_signing: false,
+              path: "iosApp/iosApp.xcodeproj",
+              team_id: "C6CHAMK5QZ",
+              bundle_identifier: "de.connect2x.tammy",
+              targets: "Tammy for iOS",
+              code_sign_identity: "Apple Distribution",
+              profile_name: "match AppStore de.connect2x.tammy",
+        )
+        sh("security find-identity -v -p codesigning")
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
