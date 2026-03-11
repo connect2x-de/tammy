@@ -345,6 +345,7 @@ release:ios-arm64:
     - echo $APPLE_DEV_PK_BASE64 | base64 --decode > dev.p12
     - echo $APPLE_DISTRIBUTION_CERT_BASE64 | base64 --decode > dist.cer
     - echo $APPLE_DISTRIBUTION_PK_BASE64 | base64 --decode > dist.p12
+    - echo $APPLE_AUTH_KEY_BASE64 | base64 --decode > AuthKey_TRMFPS2J36.p8
     - brew install fastlane
     - xcodebuild -version # might help to identify differences in local and remote XCode versions
   script:

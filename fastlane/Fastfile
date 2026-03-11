@@ -83,7 +83,6 @@ platform :ios do
             keychain_name: "apple_keychain.keychain",
             keychain_password: ENV['APPLE_KEYCHAIN_PASSWORD'],
         )
-        # This should not be necessary, but fastlane does want to use a Development Certificate
         update_code_signing_settings(
               use_automatic_signing: false,
               path: "iosApp/iosApp.xcodeproj",
@@ -98,13 +97,15 @@ platform :ios do
             password: ENV['APPLE_KEYCHAIN_PASSWORD'],
             set_default: true,
         )
-        sh("security find-identity -v -p codesigning")
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
                   configuration: "Release",
         )
-        upload_to_testflight
+        upload_to_testflight(
+            api_key_path: "api_key_info.json",
+            skip_submission: true,
+        )
     end
 end
 
