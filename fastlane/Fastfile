@@ -102,8 +102,14 @@ platform :ios do
                   export_method: "app-store",
                   configuration: "Release",
         )
+        app_store_connect_api_key(
+            key_id: "TRMFPS2J36",
+            issuer_id: "6053b7fe-68a8-4acb-89be-165aa6465141",
+            key_filepath: "AuthKey_TRMFPS2J36.p8",
+            duration: 1200, # optional (maximum 1200)
+            in_house: false # optional but may be required if using match/sigh
+        )
         upload_to_testflight(
-            api_key_path: "fastlane/api_key_info.json",
             skip_submission: true,
         )
     end
