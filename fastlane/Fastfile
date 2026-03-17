@@ -104,7 +104,7 @@ platform :ios do
         )
         api_key = app_store_connect_api_key(
             key_id: "TRMFPS2J36",
-            issuer_id: "6053b7fe-68a8-4acb-89be-165aa6465141",
+            issuer_id: "f263cb3c-525b-41a1-a247-69b0d501ecde",
             key_filepath: "AuthKey_TRMFPS2J36.p8",
             duration: 1200, # optional (maximum 1200)
             in_house: false # optional but may be required if using match/sigh
@@ -123,4 +123,3 @@ platform :ios do
         capture_screenshots
     end
 end
-

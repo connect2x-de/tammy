@@ -349,7 +349,7 @@ release:ios-arm64:
     - brew install fastlane
     - xcodebuild -version # might help to identify differences in local and remote XCode versions
   script:
-    - fastlane ios beta
+    - fastlane ios beta --verbose
 
 #release:gitlab:
 #  stage: release
