@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		07C7E9522F6C28F800A4594B /* Tammy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E9512F6C28F800A4594B /* Tammy.icon */; };
+		07C7E9532F6C28F800A4594B /* Tammy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E9512F6C28F800A4594B /* Tammy.icon */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		077DFD4A2F4D8CFD00D06695 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -43,6 +48,7 @@
 		077DFD6E2F4D9FBB00D06695 /* user9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user9.png; sourceTree = "<group>"; };
 		077DFD6F2F4D9FBB00D06695 /* user10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user10.png; sourceTree = "<group>"; };
 		077DFD702F4D9FBB00D06695 /* user11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user11.png; sourceTree = "<group>"; };
+		07C7E9512F6C28F800A4594B /* Tammy.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Tammy.icon; sourceTree = "<group>"; };
 		4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tammy for iOS.entitlements"; sourceTree = "<group>"; };
 		B9DA97B12DC1472C00A4DA20 /* Tammy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tammy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +145,7 @@
 		B9DA97A82DC1472C00A4DA20 = {
 			isa = PBXGroup;
 			children = (
+				07C7E9512F6C28F800A4594B /* Tammy.icon */,
 				4386BEC02E703FFD00849DC5 /* Tammy for iOS.entitlements */,
 				B9DA98002DC14AA900A4DA20 /* Configuration */,
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
@@ -271,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C7E9532F6C28F800A4594B /* Tammy.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C7E9522F6C28F800A4594B /* Tammy.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,8 +629,9 @@
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Tammy;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -665,8 +675,9 @@
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Tammy;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Tammy for iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
