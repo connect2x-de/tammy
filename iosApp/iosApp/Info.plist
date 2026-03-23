@@ -23,7 +23,6 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string></string>
 		<string>remote-notification</string>
 		<string>audio</string>
 		<string>processing</string>
