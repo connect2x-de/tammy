@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0764A9272F72B8F2001F6702 /* boardgame.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD612F4D9FBB00D06695 /* boardgame.png */; };
+		0764A9282F72B8F2001F6702 /* family.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD622F4D9FBB00D06695 /* family.png */; };
+		0764A9292F72B8F2001F6702 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD632F4D9FBB00D06695 /* logo.png */; };
+		0764A92A2F72B8F2001F6702 /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD642F4D9FBB00D06695 /* movie.png */; };
+		0764A92B2F72B8F2001F6702 /* user1.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD662F4D9FBB00D06695 /* user1.png */; };
+		0764A92C2F72B8F2001F6702 /* user2.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD672F4D9FBB00D06695 /* user2.png */; };
+		0764A92D2F72B8F2001F6702 /* user3.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD682F4D9FBB00D06695 /* user3.png */; };
+		0764A92E2F72B8F2001F6702 /* user4.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD692F4D9FBB00D06695 /* user4.png */; };
+		0764A92F2F72B8F2001F6702 /* user5.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6A2F4D9FBB00D06695 /* user5.png */; };
+		0764A9302F72B8F2001F6702 /* user6.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6B2F4D9FBB00D06695 /* user6.png */; };
+		0764A9312F72B8F2001F6702 /* user7.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6C2F4D9FBB00D06695 /* user7.png */; };
+		0764A9322F72B8F2001F6702 /* user8.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6D2F4D9FBB00D06695 /* user8.png */; };
+		0764A9332F72B8F2001F6702 /* user9.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6E2F4D9FBB00D06695 /* user9.png */; };
+		0764A9342F72B8F2001F6702 /* user10.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD6F2F4D9FBB00D06695 /* user10.png */; };
+		0764A9352F72B8F2001F6702 /* user11.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD702F4D9FBB00D06695 /* user11.png */; };
+		0764A9362F72B8F2001F6702 /* strawberrycake.png in Resources */ = {isa = PBXBuildFile; fileRef = 077DFD652F4D9FBB00D06695 /* strawberrycake.png */; };
 		07C7E9522F6C28F800A4594B /* Tammy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E9512F6C28F800A4594B /* Tammy.icon */; };
 		07C7E9532F6C28F800A4594B /* Tammy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E9512F6C28F800A4594B /* Tammy.icon */; };
 /* End PBXBuildFile section */
@@ -59,7 +75,6 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				Info.plist,
-				lognity.json,
 			);
 			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
 		};
@@ -72,6 +87,16 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		0764A9262F72B83D001F6702 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 077DFD362F4D8BEE00D06695 /* Resources */;
+			membershipExceptions = (
+				main.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		077DFD452F4D8CFD00D06695 /* Tammy UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -83,6 +108,7 @@
 			exceptions = (
 				B99700CA2DC9B8D800C7335B /* Exceptions for "iosApp" folder in "Tammy for iOS" target */,
 				077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */,
+				0764A9262F72B83D001F6702 /* Exceptions for "iosApp" folder in "Copy Bundle Resources" phase from "Tammy Screenshots" target */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -278,6 +304,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0764A9272F72B8F2001F6702 /* boardgame.png in Resources */,
+				0764A9282F72B8F2001F6702 /* family.png in Resources */,
+				0764A9292F72B8F2001F6702 /* logo.png in Resources */,
+				0764A92A2F72B8F2001F6702 /* movie.png in Resources */,
+				0764A92B2F72B8F2001F6702 /* user1.png in Resources */,
+				0764A92C2F72B8F2001F6702 /* user2.png in Resources */,
+				0764A92D2F72B8F2001F6702 /* user3.png in Resources */,
+				0764A92E2F72B8F2001F6702 /* user4.png in Resources */,
+				0764A92F2F72B8F2001F6702 /* user5.png in Resources */,
+				0764A9302F72B8F2001F6702 /* user6.png in Resources */,
+				0764A9312F72B8F2001F6702 /* user7.png in Resources */,
+				0764A9322F72B8F2001F6702 /* user8.png in Resources */,
+				0764A9332F72B8F2001F6702 /* user9.png in Resources */,
+				0764A9342F72B8F2001F6702 /* user10.png in Resources */,
+				0764A9352F72B8F2001F6702 /* user11.png in Resources */,
+				0764A9362F72B8F2001F6702 /* strawberrycake.png in Resources */,
 				07C7E9532F6C28F800A4594B /* Tammy.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,8 +415,9 @@
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Tammy;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -419,8 +462,9 @@
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Tammy;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Tammy for iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -467,7 +511,7 @@
 				DEVELOPMENT_TEAM = C6CHAMK5QZ;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.connect2x.Tammy-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -489,7 +533,7 @@
 				DEVELOPMENT_TEAM = C6CHAMK5QZ;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.connect2x.Tammy-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

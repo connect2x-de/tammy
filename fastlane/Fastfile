@@ -120,6 +120,8 @@ end
 
 platform :ios do
     lane :screenshots do
-        capture_screenshots
+        capture_screenshots(
+            scheme: "Tammy Screenshots"
+        )
     end
 end

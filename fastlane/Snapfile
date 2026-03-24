@@ -4,9 +4,10 @@ project("iosApp/iosApp.xcodeproj")
 stop_after_first_error(true)
 
 
-# A list of devices you want to take the screenshots from
+# These are the most common screenshot sizes for the appstore (can be submitted under 6.9'')
 devices([
-  "iPhone 17",
+  "iPhone 15 Pro Max",  # 6.7"
+  "iPhone 15 Pro"       # 6.1"
 ])
 
 languages([
