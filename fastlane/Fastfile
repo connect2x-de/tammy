@@ -75,12 +75,8 @@ end
 
 platform :ios do
     lane :beta do
-        timestamp = Time.now.strftime("%Y%m%d%H%M")
-        increment_build_number(
-            xcodeproj: 'iosApp/iosApp.xcodeproj',
-            build_number: timestamp,
-        )
-        sh("cd ../iosApp && agvtool new-version -all #{timestamp}") # fastlane cannot read the info.plist correctly
+        build = Time.now.strftime("%Y%m%d%H%M")
+        set_info_plist_value(path: "iosApp/iosApp/Info.plist", key: "CFBundleVersion", value: build)
         sync_code_signing(
             type: "appstore",
             readonly: true,
