@@ -80,7 +80,7 @@ platform :ios do
             xcodeproj: 'iosApp/iosApp.xcodeproj',
             build_number: timestamp,
         )
-        sh("cd iosApp && agvtool new-version -all #{timestamp}") # fastlane cannot read the info.plist correctly
+        sh("cd ../iosApp && agvtool new-version -all #{timestamp}") # fastlane cannot read the info.plist correctly
         sync_code_signing(
             type: "appstore",
             readonly: true,
