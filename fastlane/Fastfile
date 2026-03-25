@@ -75,8 +75,9 @@ end
 
 platform :ios do
     lane :beta do
-        build = Time.now.strftime("%Y%m%d%H%M")
-        plist = "iosApp/iosApp/Info.plist"
+        now = Time.now
+        build = "#{now.strftime('%Y')}.#{now.strftime('%-m%d')}.#{now.strftime('%-H%M')}"
+        plist = "../iosApp/iosApp/Info.plist"
         set_info_plist_value(path: plist, key: "CFBundleVersion", value: build)
         sh("/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string #{build}' #{plist} 2>/dev/null || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion #{build}' #{plist}")
         sync_code_signing(
