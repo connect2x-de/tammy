@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0764A97B2F742D95001F6702 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		077DFD3A2F4D8BEE00D06695 /* Tammy Screenshots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tammy Screenshots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		077DFD442F4D8CFD00D06695 /* Tammy UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tammy UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		077DFD612F4D9FBB00D06695 /* boardgame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boardgame.png; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
-				Info.plist,
 				lognity.json,
 			);
 			target = 077DFD322F4D8BEE00D06695 /* Tammy Screenshots */;
@@ -142,6 +142,7 @@
 				077DFD602F4D9FB300D06695 /* Screenshots */,
 				077DFD452F4D8CFD00D06695 /* Tammy UITests */,
 				B9DA97B22DC1472C00A4DA20 /* Products */,
+				0764A97B2F742D95001F6702 /* Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -376,7 +377,7 @@
 					"\"$(SRCROOT)/..Tammy/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tammy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -424,7 +425,7 @@
 					"\"$(SRCROOT)/..Tammy/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tammy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -638,7 +639,7 @@
 					"\"$(SRCROOT)/..Tammy/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tammy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -685,7 +686,7 @@
 					"\"$(SRCROOT)/..Tammy/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tammy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
