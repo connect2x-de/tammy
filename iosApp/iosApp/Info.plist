@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleVersion</key>
-	<string>$(CI_PIPELINE_IID)</string>
+	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<true/>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
