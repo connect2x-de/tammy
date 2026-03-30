@@ -81,12 +81,16 @@ platform :ios do
 #         set_info_plist_value(path: plist, key: "CFBundleVersion", value: build)
 #         sh("/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string #{build}' #{plist} 2>/dev/null || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion #{build}' #{plist}")
         build_number = ENV["CI_PIPELINE_IID"] || "1"
-        set_info_plist_value(
-            path: "iosApp/iosApp/Info.plist",
-            key: "CFBundleVersion",
-            value: build_number,
+        increment_build_number(
+            build_number: build_number,
+            xcodeproj: "iosApp/iosApp.xcodeproj"
         )
-        puts `find . -name "Info.plist" | grep -v build | grep -v DerivedData`
+#         set_info_plist_value(
+#             path: "iosApp/iosApp/Info.plist",
+#             key: "CFBundleVersion",
+#             value: build_number,
+#         )
+#         puts `find . -name "Info.plist" | grep -v build | grep -v DerivedData`
         sync_code_signing(
             type: "appstore",
             readonly: true,
