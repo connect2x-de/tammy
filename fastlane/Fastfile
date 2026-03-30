@@ -83,7 +83,8 @@ platform :ios do
         build_number = ENV["CI_PIPELINE_IID"] || "1"
         increment_build_number(
             build_number: build_number,
-            xcodeproj: "iosApp/iosApp.xcodeproj"
+            xcodeproj: "iosApp/iosApp.xcodeproj",
+            skip_info_plist: true, # last resort to avoid duplicate Info.plist values
         )
 #         set_info_plist_value(
 #             path: "iosApp/iosApp/Info.plist",
