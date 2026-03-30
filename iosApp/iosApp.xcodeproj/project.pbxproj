@@ -53,6 +53,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0764A9DD2F7A6397001F6702 /* Exceptions for "iosApp" folder in "Tammy for iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B9DA97B02DC1472C00A4DA20 /* Tammy for iOS */;
+		};
 		077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -72,6 +79,7 @@
 		B9DA97B32DC1472C00A4DA20 /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				0764A9DD2F7A6397001F6702 /* Exceptions for "iosApp" folder in "Tammy for iOS" target */,
 				077DFD3B2F4D8BEE00D06695 /* Exceptions for "iosApp" folder in "Tammy Screenshots" target */,
 			);
 			path = iosApp;
