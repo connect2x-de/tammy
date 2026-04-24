@@ -20,10 +20,7 @@ In Android Studio or IntelliJ, choose the Android configuration and run on an em
 
 ### Web
 
-Please **note**: web is still experimental and is missing some features that are present in the other versions. We are
-working on it.
-
-`./gradlew webBrowserDevelopmentRun`
+`./gradlew wasmJsBrowserDevelopmentRun`
 
 ## Create release
 
