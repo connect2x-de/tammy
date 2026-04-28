@@ -65,7 +65,7 @@ fun MatrixMultiMessengerConfiguration.tammyConfiguration(
             }
 
             Flavor.DEV -> {
-                defaultHomeServer = "demo.timmy-messenger.de"
+                defaultHomeServer = "matrix.dev.connect2x.de"
                 databaseEncryptionEnabled = false
             }
         }
