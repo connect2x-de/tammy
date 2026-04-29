@@ -11,9 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Switch to new month based version schema
-- Bump Trixnity Messenger to 4.5.0
-
 ### Deprecated
 
 ### Removed
@@ -21,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 26.4.0
+
+### Changed
+
+- Switch to new month based version schema
+- Bump Trixnity Messenger to 4.5.0
 
 ## 2.2.0
 
