@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## 26.4.1
+
+### Changed
+
+- Bump Trixnity Messenger to 4.5.1
+
 ## 26.4.0
 
 ### Changed
