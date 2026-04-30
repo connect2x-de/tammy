@@ -7,7 +7,8 @@ stop_after_first_error(true)
 # These are the most common screenshot sizes for the appstore (can be submitted under 6.9'')
 devices([
   "iPhone 15 Pro Max",  # 6.7"
-  "iPhone 15 Pro"       # 6.1"
+  "iPhone 15 Pro",       # 6.1"
+  "iPad Pro 13-inch (M4)", # iPad 13"
 ])
 
 languages([

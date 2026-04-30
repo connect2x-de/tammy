@@ -75,23 +75,6 @@ end
 
 platform :ios do
     lane :beta do
-#         now = Time.now
-#         build = "#{now.strftime('%Y')}.#{now.strftime('%-m%d')}.#{now.strftime('%-H%M')}"
-#         plist = "../iosApp/iosApp/Info.plist"
-#         set_info_plist_value(path: plist, key: "CFBundleVersion", value: build)
-#         sh("/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string #{build}' #{plist} 2>/dev/null || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion #{build}' #{plist}")
-        build_number = ENV["CI_PIPELINE_IID"] || "1"
-#         increment_build_number(
-#             build_number: build_number,
-#             xcodeproj: "iosApp/iosApp.xcodeproj",
-#             skip_info_plist: true, # last resort to avoid duplicate Info.plist values
-#         )
-#         set_info_plist_value(
-#             path: "iosApp/iosApp/Info.plist",
-#             key: "CFBundleVersion",
-#             value: build_number,
-#         )
-#         puts `find . -name "Info.plist" | grep -v build | grep -v DerivedData`
         sync_code_signing(
             type: "appstore",
             readonly: true,
@@ -114,6 +97,7 @@ platform :ios do
             password: ENV['APPLE_KEYCHAIN_PASSWORD'],
             set_default: true,
         )
+        build_number = ENV["CI_PIPELINE_IID"] || "1"
         build_app(project: "iosApp/iosApp.xcodeproj",
                   scheme: "Tammy for iOS",
                   export_method: "app-store",
