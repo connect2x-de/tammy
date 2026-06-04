@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated Trixnity Messenger to 4.5.3-SNAPSHOT.CI-20260603.121345
+
 ### Deprecated
 
 ### Removed
