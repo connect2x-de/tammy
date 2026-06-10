@@ -27,5 +27,5 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("de.connect2x.conventions.c2x-settings-plugin") version "20260605.005540"
+    id("de.connect2x.conventions.c2x-settings-plugin") version "20260606.144834"
 }
