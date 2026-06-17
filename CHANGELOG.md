@@ -4,16 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
- 
+
 ## [Unreleased]
 
 ### Added
 
-- Add publishing on F-Droid
-
 ### Changed
-
-- Bump Trixnity Messenger to 4.2.2
 
 ### Deprecated
 
@@ -22,6 +18,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 26.6.1
+
+### Changed
+
+- Updated Trixnity Messenger to 4.6.1
+
+## 26.4.2
+
+### Changed
+
+- Bump Trixnity Messenger to 4.5.2
+
+## 26.4.1
+
+### Changed
+
+- Bump Trixnity Messenger to 4.5.1
+
+## 26.4.0
+
+### Changed
+
+- Switch to new month based version schema
+- Bump Trixnity Messenger to 4.5.0
+
+## 2.2.0
+
+### Changed
+
+- Bump Trixnity Messenger to 4.4.0
+
+## 2.1.0
+
+### Added
+
+- Add publishing on F-Droid
+- Support for Kotlin/WasmJs
+
+### Changed
+
+- Bump Trixnity Messenger to 4.3.1
+
+### Fixed
+
+- Use another gateway for UnifiedPush
 
 ## 2.0.6
 
