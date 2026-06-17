@@ -397,6 +397,23 @@ tasks.register("scanAndroidLibreForNonFreeClasses", Exec::class) {
     }
 }
 
+val iosMarketingVersion by tasks.registering {
+    dependsOn()
+    group = "build config"
+    val generatedSrc = layout.buildDirectory.dir("generatedSrc/")
+    doLast {
+        val outputFile = generatedSrc.get().file("version.txt")
+
+        val buildConfigString = """$version""".trimIndent()
+        outputFile.asFile.apply {
+            ensureParentDirsCreated()
+            createNewFile()
+            writeText(buildConfigString)
+        }
+    }
+    outputs.dirs(generatedSrc)
+}
+
 val gitLabProjectUrl =
     "${System.getenv("CI_API_V4_URL")}/projects/${System.getenv("CI_PROJECT_ID")}"
 
