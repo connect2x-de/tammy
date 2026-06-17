@@ -398,17 +398,16 @@ tasks.register("scanAndroidLibreForNonFreeClasses", Exec::class) {
 }
 
 val iosMarketingVersion by tasks.registering {
-    dependsOn()
     group = "build config"
+    description = "we need a MARKETING_VERSION for iOS releases that is coming from gradle"
+
     val generatedSrc = layout.buildDirectory.dir("generatedSrc/")
     doLast {
         val outputFile = generatedSrc.get().file("version.txt")
-
-        val buildConfigString = """$version""".trimIndent()
         outputFile.asFile.apply {
             ensureParentDirsCreated()
             createNewFile()
-            writeText(buildConfigString)
+            writeText(appVersion) // FIXME has to be version; for testing only
         }
     }
     outputs.dirs(generatedSrc)
