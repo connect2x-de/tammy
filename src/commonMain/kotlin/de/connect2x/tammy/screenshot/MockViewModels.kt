@@ -9,12 +9,16 @@ import de.connect2x.trixnity.core.model.EventId
 import de.connect2x.trixnity.core.model.RoomId
 import de.connect2x.trixnity.core.model.UserId
 import de.connect2x.trixnity.core.model.events.m.Presence
+import de.connect2x.trixnity.core.model.events.m.room.RoomMessageEventContent
 import de.connect2x.trixnity.crypto.key.UserTrustLevel
+import de.connect2x.trixnity.messenger.abi.TrixnityMessengerPrivateApi
 import de.connect2x.trixnity.messenger.util.FileDescriptor
 import de.connect2x.trixnity.messenger.util.FileTransferProgressElement
 import de.connect2x.trixnity.messenger.util.html.HtmlNode
 import de.connect2x.trixnity.messenger.viewmodel.*
 import de.connect2x.trixnity.messenger.viewmodel.initialsync.InitialSyncRouter
+import de.connect2x.trixnity.messenger.viewmodel.media.AudioRecorderViewModel
+import de.connect2x.trixnity.messenger.viewmodel.media.MediaPlayerViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.settings.ExtrasRouter
@@ -253,6 +257,7 @@ class RoomListViewModelMock(
     override fun createNewRoom() {}
     override fun createNewRoomFor(userId: UserId) {}
     override fun errorDismiss() {}
+
     // this trick is needed for iOS UITesting where we cannot directly manipulate the showRoom variable
     override fun selectRoom(roomId: RoomId) {
         room.value = ChildStack(
@@ -260,6 +265,7 @@ class RoomListViewModelMock(
             RoomRouter.Wrapper.View(RoomViewModelMock(locale))
         )
     }
+
     override fun sendLogs() {}
     override fun verifyAccount(userId: UserId) {}
 }
@@ -278,6 +284,8 @@ class AccountViewModelMock : AccountViewModel {
     )
     override val activeAccount: StateFlow<UserId?> = MutableStateFlow(UserId("tammy", "server"))
     override val isSingleAccount: StateFlow<Boolean> = MutableStateFlow(true)
+    override val globalNotificationCount: StateFlow<String?> = MutableStateFlow(null)
+    override val accountNotificationCounts: StateFlow<Map<UserId, String?>> = MutableStateFlow(mapOf())
 
     override fun selectActiveAccount(userId: UserId?) {}
     override fun openUserSettings() {}
@@ -323,6 +331,9 @@ class RoomListElementViewModelMock(
 
     override fun acceptInvitation() {}
     override fun clearError() {}
+    override fun markUnread() {}
+    override fun markRead() {}
+
     override fun rejectInvitation() {}
     override fun rejectInvitationAndBlockInviter() {}
     override fun unknock() {}
@@ -349,9 +360,11 @@ class RoomViewModelMock(locale: Locale) : RoomViewModel {
 class TimelineViewModelMock(
     locale: Locale,
 ) : TimelineViewModel {
+    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     override val draggedFile: StateFlow<FileDescriptor?> = MutableStateFlow(null)
     override val unreadCount: StateFlow<String?> = MutableStateFlow(null)
     override val error: StateFlow<String?> = MutableStateFlow(null)
+
     override val inputAreaViewModel: InputAreaViewModel = InputAreaViewModelModelMock()
     override val isDirect: StateFlow<Boolean> = MutableStateFlow(false)
     override val reportMessageStack: Value<ChildStack<ReportMessageRouter.Config, ReportMessageRouter.Wrapper>> =
@@ -526,8 +539,10 @@ class TimelineViewModelMock(
     override val viewState: MutableStateFlow<TimelineViewModel.ViewState?> = MutableStateFlow(null)
     override val canLoadBefore: StateFlow<Boolean?> = MutableStateFlow(false)
     override val canLoadAfter: StateFlow<Boolean?> = MutableStateFlow(false)
-    override val scrollTo: Flow<String> = elements.map { it.last().key }
+    override val scrollTo: StateFlow<String?> = elements.map { it.last().key }
+        .stateIn(coroutineScope, SharingStarted.Lazily, null)
 
+    override fun onProcessedScrollTo(key: String) {}
     override fun errorDismiss() {}
     override fun jumpToEndOfTimeline() {}
     override suspend fun loadBefore() {}
@@ -586,6 +601,15 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     override val listOfMentions: StateFlow<List<UserInfoElement>?> = MutableStateFlow(null)
     override val listOfMentionsLoading: StateFlow<Boolean> = MutableStateFlow(false)
     override val useMarkdown: StateFlow<Boolean> = MutableStateFlow(false)
+
+    @OptIn(TrixnityMessengerPrivateApi::class)
+    override val audio: AudioRecordingAreaViewModel = object : AudioRecordingAreaViewModel {
+        override val recorder: AudioRecorderViewModel? = null
+        override val capturePlayer: StateFlow<MediaPlayerViewModel?> = MutableStateFlow(null)
+        override fun sendAudioMessage() {}
+        override fun deleteAudioMessage() {}
+        override fun loadAudioMessage(content: RoomMessageEventContent.FileBased.Audio) {}
+    }
     override val showAttachmentSelectDialog: StateFlow<Boolean> = MutableStateFlow(false)
 
     override fun selectMention(userId: UserId) {}
