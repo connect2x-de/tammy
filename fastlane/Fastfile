@@ -100,7 +100,8 @@ platform :ios do
         marketing_version = File.read("../build/generatedSrc/version.txt")
         puts marketing_version
         increment_version_number(
-          version_number: marketing_version
+          version_number: marketing_version,
+          xcodeproj: "iosApp/iosApp.xcodeproj",
         )
         build_number = ENV["CI_PIPELINE_IID"] || "1"
         build_app(project: "iosApp/iosApp.xcodeproj",
