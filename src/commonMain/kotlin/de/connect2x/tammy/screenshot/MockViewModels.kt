@@ -99,7 +99,7 @@ class MockMainViewModel(
     override fun closeDetailsAndShowList() {}
     override fun onOpenAvatarCutter(userId: UserId, file: FileDescriptor) {}
     override fun onOpenAvatarCutter(userId: UserId, selectedRoomId: RoomId, file: FileDescriptor) {}
-    override fun onRoomSelected(userId: UserId, id: RoomId) {}
+    override fun onRoomSelected(userId: UserId, id: RoomId, via: Set<String>?) {}
     override fun openMention(userId: UserId, timelineElementMention: TimelineElementMention) {}
     override fun openSelfVerification(userId: UserId) {}
     override fun start() {}
