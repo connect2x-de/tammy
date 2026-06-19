@@ -407,7 +407,7 @@ val iosMarketingVersion by tasks.registering {
         outputFile.asFile.apply {
             ensureParentDirsCreated()
             createNewFile()
-            writeText(appVersion) // FIXME has to be version; for testing only
+            writeText(appPublishedVersion)
         }
     }
     outputs.dirs(generatedSrc)
