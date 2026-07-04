@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use gitlab shell runners
+- Update Trixnity Messenger to 4.8.2-SNAPSHOT.CI-20260701.165216
 
 ### Deprecated
 
