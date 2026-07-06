@@ -1,11 +1,8 @@
-@file:OptIn(ExperimentalComposeLibrary::class)
-
 import de.connect2x.conventions.*
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.nativeplatform.platform.internal.DefaultArchitecture
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.nativeplatform.platform.internal.DefaultOperatingSystem
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
@@ -15,7 +12,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.nio.file.Path
-
 
 plugins {
     alias(sharedLibs.plugins.kotlin.multiplatform)
@@ -33,14 +29,19 @@ configureJava(sharedLibs.versions.targetJvm)
 
 val appVersion = libs.versions.appVersion.get()
 val appPublishedVersion = libs.versions.appPublishedVersion.get()
-if (isRelease)
+if (CI.isRelease)
     require(appVersion == appPublishedVersion) {
         "when creating a release, the appVersion ($appVersion) must the same as the appPublishedVersion($appPublishedVersion)"
     }
-val appSuffixedVersion = withVersionSuffix(appVersion)
+val appSuffixedVersion = withVersionSuffix(libs.versions.appVersion)
 val appName = "Tammy"
 val appId = "de.connect2x.tammy"
 val appHomepage = "https://tammy.connect2x.de"
+
+fun String.substringAfterMarkdownFrontMatter(): String {
+    return this.substringAfter("---").substringAfter("---")
+}
+
 val privacyInfo =
     File("website/content/privacy.de-DE.md").readText().substringAfterMarkdownFrontMatter()
 val imprint =
@@ -62,7 +63,7 @@ val arch: DefaultArchitecture =
 enum class BuildFlavor { PROD, DEV }
 
 val buildFlavor =
-    BuildFlavor.valueOf(System.getenv("TAMMY_BUILD_FLAVOR") ?: if (isCI) "PROD" else "DEV")
+    BuildFlavor.valueOf(System.getenv("TAMMY_BUILD_FLAVOR") ?: if (CI.isCI) "PROD" else "DEV")
 
 registerMultiplatformLicensesTasks { licenseTask, target, variant ->
     // TODO: move this into c2x-conventions eventually
