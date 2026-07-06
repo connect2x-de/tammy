@@ -1,5 +1,8 @@
 package de.connect2x.tammy
 
+import de.connect2x.tammy.generated.resources.Res
+import de.connect2x.tammy.generated.resources.status_icon
+import de.connect2x.trixnity.messenger.compose.view.DrawableResourceAppIcon
 import de.connect2x.trixnity.messenger.compose.view.composeViewModule
 import de.connect2x.trixnity.messenger.compose.view.typography.nunito.addNunitoThemeTypography
 import de.connect2x.trixnity.messenger.i18n.DefaultLanguages
@@ -21,6 +24,7 @@ fun MatrixMultiMessengerConfiguration.tammyConfiguration(
     privacyInfo = BuildConfig.privacyInfo
     imprint = BuildConfig.imprint
     licenses = BuildConfig.licenses
+    icon = DrawableResourceAppIcon(Res.drawable.status_icon)
     sendLogsEmailAddress = null
 
     appUri = "$appId:"
