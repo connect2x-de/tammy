@@ -294,7 +294,7 @@ release:playstore:
   script:
     - fastlane android release
 
-release:ios-arm64:
+release:ios:
   stage: release
   interruptible: true
   tags: [ "saas-macos-large-m2pro" ]
