@@ -148,7 +148,7 @@ kotlin {
                 api(libs.trixnity.messenger.compose.view)
                 implementation(libs.trixnity.messenger)
                 implementation(libs.trixnity.messenger.compose.view.typography.nunito)
-                implementation(compose.components.resources)
+                implementation(sharedLibs.compose.resources)
                 implementation(sharedLibs.lognity.core)
                 implementation(sharedLibs.lognity.config)
                 implementation(sharedLibs.lognity.core.config)
@@ -179,7 +179,7 @@ kotlin {
         }
         androidMain {
             dependencies {
-                implementation(compose.uiTooling)
+                implementation(sharedLibs.compose.uiTooling)
                 implementation(sharedLibs.androidx.appcompat)
                 implementation(sharedLibs.androidx.work.runtime.ktx)
                 implementation(sharedLibs.androidx.lifecycle.livedata.ktx)
@@ -197,7 +197,7 @@ kotlin {
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(compose.uiTest)
+                implementation(sharedLibs.compose.uiTest)
 
             }
         }

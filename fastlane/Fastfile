@@ -119,6 +119,14 @@ platform :ios do
             skip_waiting_for_build_processing: true,
             distribute_external: false,
         )
+        deliver(
+          submit_for_review: true,
+          automatic_release: true,
+          release_notes: { # we could make this a bit more sophisticated, but to do so automatically is a bit more work
+            "en-US" => "Bug fixes and performance improvements.",
+            "de-DE" => "Fehlerbehebungen und Leistungsverbesserungen."
+          }
+        )
     end
 end
 
