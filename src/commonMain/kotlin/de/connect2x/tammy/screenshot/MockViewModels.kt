@@ -366,6 +366,7 @@ class TimelineViewModelMock(
     override val error: StateFlow<String?> = MutableStateFlow(null)
 
     override val inputAreaViewModel: InputAreaViewModel = InputAreaViewModelModelMock()
+
     override val isDirect: StateFlow<Boolean> = MutableStateFlow(false)
     override val reportMessageStack: Value<ChildStack<ReportMessageRouter.Config, ReportMessageRouter.Wrapper>> =
         MutableValue(ChildStack(ReportMessageRouter.Config.None, ReportMessageRouter.Wrapper.None))
@@ -536,13 +537,12 @@ class TimelineViewModelMock(
                 ),
             )
         )
-    override val viewState: MutableStateFlow<TimelineViewModel.ViewState?> = MutableStateFlow(null)
     override val canLoadBefore: StateFlow<Boolean?> = MutableStateFlow(false)
     override val canLoadAfter: StateFlow<Boolean?> = MutableStateFlow(false)
     override val scrollTo: StateFlow<String?> = elements.map { it.last().key }
         .stateIn(coroutineScope, SharingStarted.Lazily, null)
 
-    override fun onProcessedScrollTo(key: String) {}
+    override fun setViewState(viewState: TimelineViewModel.ViewState) {}
     override fun errorDismiss() {}
     override fun jumpToEndOfTimeline() {}
     override suspend fun loadBefore() {}
@@ -551,6 +551,9 @@ class TimelineViewModelMock(
     override suspend fun dropBefore(key: String) {}
     override suspend fun dropAfter(key: String) {}
     override suspend fun markAsRead(key: String) {}
+    override suspend fun finishedScrollTo(key: String) {
+        TODO("Not yet implemented")
+    }
 }
 
 class RoomHeaderViewModelMock(locale: Locale) : RoomHeaderViewModel {
@@ -598,8 +601,12 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     override val isAllowedToSendMessages: StateFlow<Boolean> = MutableStateFlow(true)
     override val textField: TextFieldViewModel = TextFieldViewModelImpl(100, "Don't forget the games 😉")
     override val isSendEnabled: StateFlow<Boolean> = MutableStateFlow(true)
+    @Deprecated("use suggestedMentions instead", replaceWith = ReplaceWith("suggestedMentions"))
     override val listOfMentions: StateFlow<List<UserInfoElement>?> = MutableStateFlow(null)
+    @Deprecated("use suggestedMentionsLoading instead", replaceWith = ReplaceWith("suggestedMentionsLoading"))
     override val listOfMentionsLoading: StateFlow<Boolean> = MutableStateFlow(false)
+    override val suggestedMentions: StateFlow<List<InputAreaViewModel.SuggestedMention>?> = MutableStateFlow(null)
+    override val suggestedMentionsLoading: StateFlow<Boolean> = MutableStateFlow(false)
     override val useMarkdown: StateFlow<Boolean> = MutableStateFlow(false)
 
     @OptIn(TrixnityMessengerPrivateApi::class)
@@ -612,7 +619,10 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     }
     override val showAttachmentSelectDialog: StateFlow<Boolean> = MutableStateFlow(false)
 
+    @Deprecated("use selectionMention with id instead")
     override fun selectMention(userId: UserId) {}
+    override fun selectMention(id: String) {}
+
     override fun closeAttachmentDialog() {}
     override fun onAttachmentFileSelect(file: FileDescriptor) {}
     override fun replaceMessage(roomId: RoomId, eventId: EventId) {}
@@ -647,6 +657,7 @@ class TimelineElementHolderViewModelMock(
     override val isReplaced: StateFlow<Boolean> = MutableStateFlow(false)
     override val redactionError: StateFlow<String?> = MutableStateFlow(null)
     override val showRedactionWarning: StateFlow<Boolean> = MutableStateFlow(false)
+    @Deprecated("when supported by the homeserver, redactions are applied immediately")
     override val redactionInProgress: StateFlow<Boolean> = MutableStateFlow(false)
     override val showLoadingIndicatorAfter: StateFlow<Boolean> = MutableStateFlow(false)
     override val showLoadingIndicatorBefore: StateFlow<Boolean> = MutableStateFlow(false)
@@ -704,6 +715,7 @@ class TextMessageViewModelMock(
     override val mentionsInBody: Map<IntRange, StateFlow<TimelineElementMention?>> = mapOf()
     override val mentionsInFormattedBody: StateFlow<Map<String, TimelineElementMention?>> = MutableStateFlow(mapOf())
     override fun openMention(mention: TimelineElementMention) {}
+    override val isMentioned: Boolean = false
 }
 
 class ImageMessageViewModelMock(
@@ -744,4 +756,5 @@ class ImageMessageViewModelMock(
     override fun downloadMedia(processFile: suspend (PlatformMedia) -> Unit, onDownloadCancelled: () -> Unit) {}
     override fun cancelDownloadMedia() {}
     override fun openMention(mention: TimelineElementMention) {}
+    override val isMentioned: Boolean = false
 }
