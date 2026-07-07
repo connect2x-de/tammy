@@ -286,9 +286,8 @@ publish:release:ios:
   tags: [ "saas-macos-large-m2pro" ]
   image: "macos-26-xcode-26"
   timeout: 2h
-  rules:
-    - *if-release
-    - *if-merge-request # FIXME TESTING
+#  rules:
+#    - *if-release
   artifacts:
     name: build
     when: always
