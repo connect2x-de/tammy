@@ -125,7 +125,8 @@ platform :ios do
           release_notes: { # we could make this a bit more sophisticated, but to do so automatically is a bit more work
             "en-US" => "Bug fixes and performance improvements.",
             "de-DE" => "Fehlerbehebungen und Leistungsverbesserungen."
-          }
+          },
+          force: true,
         )
     end
 end
