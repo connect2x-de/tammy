@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - DEPENDENCY: bump c2x-settings-plugin version
 - Use gitlab shell runners
-- Update Trixnity Messenger to 4.8.2-SNAPSHOT.CI-20260706.074328
+- Update Trixnity Messenger to 4.9.0
 
 ### Deprecated
 
