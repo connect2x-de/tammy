@@ -148,7 +148,7 @@ kotlin {
                 api(libs.trixnity.messenger.compose.view)
                 implementation(libs.trixnity.messenger)
                 implementation(libs.trixnity.messenger.compose.view.typography.nunito)
-                implementation(compose.components.resources)
+                implementation(sharedLibs.compose.resources)
                 implementation(sharedLibs.lognity.core)
                 implementation(sharedLibs.lognity.config)
                 implementation(sharedLibs.lognity.core.config)
@@ -157,16 +157,7 @@ kotlin {
         }
         jvmMain {
             dependencies {
-                // this is needed to create lock files working on all machines
-                if (System.getProperty("bundleAll") == "true") {
-                    implementation(compose.desktop.linux_x64)
-                    implementation(compose.desktop.linux_arm64)
-                    implementation(compose.desktop.windows_x64)
-                    implementation(compose.desktop.macos_x64)
-                    implementation(compose.desktop.macos_arm64)
-                } else {
-                    implementation(compose.desktop.currentOs)
-                }
+                implementation(compose.desktop.currentOs)
                 implementation(sharedLibs.kotlinx.coroutines.swing)
             }
         }
@@ -178,11 +169,6 @@ kotlin {
         }
         androidMain {
             dependencies {
-                implementation(compose.uiTooling)
-                implementation(sharedLibs.androidx.appcompat)
-                implementation(sharedLibs.androidx.work.runtime.ktx)
-                implementation(sharedLibs.androidx.lifecycle.livedata.ktx)
-                implementation(sharedLibs.androidx.activity.compose)
                 implementation(libs.trixnity.messenger.notification.unifiedpush)
             }
         }
@@ -205,8 +191,8 @@ kotlin {
 
 dependencies {
     androidTestImplementation(libs.screengrab)
-    androidTestImplementation(sharedLibs.compose.ui.test.junit4.android)
-    debugImplementation(sharedLibs.compose.ui.test.android.manifest)
+    androidTestImplementation(sharedLibs.compose.uiTestJunit4)
+    debugImplementation(sharedLibs.compose.uiTestManifest)
 }
 
 val distributionJavaHome = when {
