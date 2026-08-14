@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- iOS: push notifications register for sandbox or production environment
+
 ### Security
 
 ## 26.6.3
