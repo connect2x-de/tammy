@@ -84,8 +84,6 @@ compile:macos-arm64:
   interruptible: true
   tags: [ "c2x","mac","arm64","shell","medium" ]
   timeout: 30m
-  variables:
-    HOMEBREW_NO_AUTO_UPDATE: 1
   rules:
     - *if-main
     - *if-release
@@ -96,7 +94,6 @@ compile:macos-arm64:
     paths:
       - "build/compose"
   before_script:
-    - brew install --cask temurin@21
     - echo $APPLE_KEYCHAIN_FILE_BASE64 | base64 --decode > apple_keychain.keychain
     - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
     - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
