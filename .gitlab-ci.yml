@@ -64,7 +64,7 @@ compile:linux-x64:
 compile:windows-x64:
   stage: compile
   interruptible: true
-  tags: [ "c2x","win","amd64" ]
+  tags: [ "c2x","win","amd64","shell" ]
   rules:
     - *if-main
     - *if-release
