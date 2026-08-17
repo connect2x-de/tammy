@@ -14,6 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - DEPENDENCY: bump c2x-settings-plugin version
 - Use gitlab shell runners
 - Update Trixnity Messenger to 4.9.2-SNAPSHOT.CI-20260817.140029
+- Dropped macOS x64 support
 
 ### Deprecated
 
