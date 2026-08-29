@@ -1,6 +1,6 @@
 [versions]
 
-appPublishedVersion = "26.6.3" # The current published version of this app
+appPublishedVersion = "26.8.0" # The current published version of this app
 appVersion = "26.8.0" # The next version of this app
 
 trixnityMessenger = "4.10.0" # https://gitlab.com/connect2x/trixnity-messenger/trixnity-messenger/-/packages
