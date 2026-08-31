@@ -257,7 +257,7 @@ stages:
 publish:release:ios:
   stage: publish
   interruptible: true
-  tags: [ "saas-macos-large-m2pro" ]
+  tags: [ "c2x","mac","arm64","shell","medium" ]
   image: "macos-26-xcode-26"
   timeout: 2h
   #  rules:
