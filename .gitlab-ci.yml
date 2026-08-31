@@ -7,8 +7,8 @@ workflow:
     - if: $CI_PIPELINE_SOURCE == "schedule"
 
 stages:
-#  - compile
-#  - check
+  - compile
+  - check
   - publish
 
 .if-merge-request: &if-merge-request
@@ -22,263 +22,237 @@ stages:
     when: never
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-#compile:android:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/outputs/bundle"
-#      - "build/outputs/apk"
-#  before_script:
-#    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
-#  script:
-#    - ./gradlew
-#      uploadAndroidDistributable
-#      --stacktrace
-#
-#compile:linux-x64:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/compose"
-#  script:
-#    - ./gradlew
-#      uploadPlatformDistributable
-#      --stacktrace
-#
-#compile:web:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/compose"
-#      - "build/dist"
-#      - "**/build/**/yarn.lock"
-#  script:
-#    - ./gradlew
-#      uploadWebZipDistributable
-#      --stacktrace
-#
-#compile:windows-x64:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-win" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/compose"
-#  script:
-#    - ./gradlew
-#      uploadPlatformDistributable
-#      --stacktrace
-#
-#compile:macos-x64:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-mac" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/compose"
-#  before_script:
-#    - echo $APPLE_KEYCHAIN_FILE_BASE64 | base64 --decode > apple_keychain.keychain
-#    - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
-#    - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
-#    - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
-#  script:
-#    - ./gradlew
-#      uploadPlatformDistributable
-#      --stacktrace
-#
-#compile:macos-arm64:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "saas-macos-medium-m1" ]
-#  timeout: 30m
-#  variables:
-#    HOMEBREW_NO_AUTO_UPDATE: 1
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/compose"
-#  before_script:
-#    - brew install --cask temurin@21
-#    - echo $APPLE_KEYCHAIN_FILE_BASE64 | base64 --decode > apple_keychain.keychain
-#    - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
-#    - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
-#    - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
-#  script:
-#    - ./gradlew
-#      uploadPlatformDistributable
-#      --stacktrace
-#
-#compile:prepare-website:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  artifacts:
-#    paths:
-#      - website/config/_default/params.yaml
-#      - website/static/fastlane
-#      - website/static/Tammy-Windows-x64.appinstaller
-#      - website/static/Tammy-Windows-arm64.appinstaller
-#  script:
-#    - ./gradlew
-#      prepareWebsite
-#      --stacktrace
-#
-#compile:website:
-#  stage: compile
-#  interruptible: true
-#  tags: [ "connect2x-linux" ]
-#  image: registry.gitlab.com/pages/hugo/hugo_extended:latest
-#  needs: [ "compile:prepare-website" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  script:
-#    - cd website
-#    - hugo
-#  artifacts:
-#    paths:
-#      - website/public
-#
-#check:changelog:
-#  stage: check
-#  interruptible: true
-#  timeout: 5m
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-merge-request
-#  script:
-#    - git fetch origin main
-#    - |
-#      if git diff --name-only HEAD origin/main | grep "CHANGELOG.md"; then
-#        echo "CHANGELOG.md has changed"
-#      else
-#        echo "CHANGELOG.md has not changed"
-#        exit 1
-#      fi
-#
-#publish:release:website:
-#  stage: publish
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-main
-#    - *if-release
-#  variables:
-#    SSH_SERVER_PUBLIC_KEY: |
-#      |1|rkXUG6Zg2U7Icsi1+W+16Bf0Agg=|aIDGBml+j9OBTthTodbxWcKZGN8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD24yORSNdYYIm+huvj+F9wc+BFsGSdi2V7uC+P54T1xJt+ll1LezHHps5jgRJU5JYEeGRWwRjaTMn+wNq8RwtEoDo830DckEzu/KqOVMi2o77XFi2e6oIcUKwvpouHHrSyLgeyipLaV392QNISj+AT3IXBICo/gXVj82kKN//je7hLkVnPX3/7fE3CWKTiTAh3iRa302gfPuDutaJ9Iu0Z+LLk/P5UWSdjhcXKMwPBWrQTK9Is9JI7YH0Kd49NyXrz3dgmyhm1HYtCu5yvwopcMf0iaFG40COlIHx8GzOp7/6E9mULWKS2A2942uxmRIxL71Cs1oTWJgck1ymNVv5vIPZ+/9ROrZtfoHuK8LIIZWupvFqBbYduJ7Th9rPnlNmI7I0QgTt7iRuxjyCNs7TdBZLidnEtNzcHo9iQ1kkWY0BRGk3PvkgmknzMmc43D4dj7AEK1YOVYXfYmeZXtLnK2BjYZcJ1bcFfvNOrPyQ+pVw78ZWm+n7XQgXkwKGr+2c=
-#      |1|2ywjh4MQnSRFiNbupqXVfgDB1B0=|6neQereUz86gfJcvhEIOGrCXX3o= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGEPcfO5e/GIvHJrOb92rpz5x6xRR7V7QpAybe01OVA3xxgEXStOAHx+an8CGiyeRWrcuP9WQJLdkwRpLgF5fY=
-#      |1|NqjIeCIEYbER3NUsDTJfBNO4rdY=|QxGhn1HkpIx4BBILLbI44AnIIIw= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk09gBfcCwKjFFF9dKn2pNTrplhAVjY4TrJABwUJWUg
-#    SSH_USER: my_webapp__5
-#    SSH_SERVER: connect2x.de
-#  before_script:
-#    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client lftp -y )"
-#    - eval $(ssh-agent -s)
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - echo $SSH_SERVER_PUBLIC_KEY >> ~/.ssh/known_hosts
-#    - chmod 644 ~/.ssh/known_hosts
-#  script:
-#    - lftp -e "open sftp://connect2x.de; user $SSH_USER $SSH_PASSWORD_WEBSITE; mirror -X .* -X .*/ --reverse --verbose --delete website/public/ www/; bye"
-#
-#publish:release:webapp:
-#  stage: publish
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-release
-#  variables:
-#    SSH_SERVER_PUBLIC_KEY: |
-#      |1|rkXUG6Zg2U7Icsi1+W+16Bf0Agg=|aIDGBml+j9OBTthTodbxWcKZGN8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD24yORSNdYYIm+huvj+F9wc+BFsGSdi2V7uC+P54T1xJt+ll1LezHHps5jgRJU5JYEeGRWwRjaTMn+wNq8RwtEoDo830DckEzu/KqOVMi2o77XFi2e6oIcUKwvpouHHrSyLgeyipLaV392QNISj+AT3IXBICo/gXVj82kKN//je7hLkVnPX3/7fE3CWKTiTAh3iRa302gfPuDutaJ9Iu0Z+LLk/P5UWSdjhcXKMwPBWrQTK9Is9JI7YH0Kd49NyXrz3dgmyhm1HYtCu5yvwopcMf0iaFG40COlIHx8GzOp7/6E9mULWKS2A2942uxmRIxL71Cs1oTWJgck1ymNVv5vIPZ+/9ROrZtfoHuK8LIIZWupvFqBbYduJ7Th9rPnlNmI7I0QgTt7iRuxjyCNs7TdBZLidnEtNzcHo9iQ1kkWY0BRGk3PvkgmknzMmc43D4dj7AEK1YOVYXfYmeZXtLnK2BjYZcJ1bcFfvNOrPyQ+pVw78ZWm+n7XQgXkwKGr+2c=
-#      |1|2ywjh4MQnSRFiNbupqXVfgDB1B0=|6neQereUz86gfJcvhEIOGrCXX3o= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGEPcfO5e/GIvHJrOb92rpz5x6xRR7V7QpAybe01OVA3xxgEXStOAHx+an8CGiyeRWrcuP9WQJLdkwRpLgF5fY=
-#      |1|NqjIeCIEYbER3NUsDTJfBNO4rdY=|QxGhn1HkpIx4BBILLbI44AnIIIw= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk09gBfcCwKjFFF9dKn2pNTrplhAVjY4TrJABwUJWUg
-#    SSH_USER: my_webapp__4
-#    SSH_SERVER: connect2x.de
-#  before_script:
-#    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client lftp -y )"
-#    - eval $(ssh-agent -s)
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - echo $SSH_SERVER_PUBLIC_KEY >> ~/.ssh/known_hosts
-#    - chmod 644 ~/.ssh/known_hosts
-#  script:
-#    - lftp -e "open sftp://connect2x.de; user $SSH_USER $SSH_PASSWORD_APP; mirror -X .* -X .*/ --reverse --verbose --delete build/dist/composeWebCompatibility/productionExecutable/ www/; bye"
-#
-#publish:beta:playstore:
-#  stage: publish
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-main
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#    paths:
-#      - "build/outputs/bundle"
-#      - "build/outputs/apk"
-#  before_script:
-#    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
-#    - echo $ANDROID_SERVICE_ACCOUNT_JSON_BASE64 | base64 --decode > android_service-account.json
-#  script:
-#    - fastlane android releaseBeta
-#
-#publish:release:playstore:
-#  stage: publish
-#  interruptible: true
-#  tags: [ "connect2x-linux-shell-small" ]
-#  rules:
-#    - *if-release
-#  artifacts:
-#    name: build
-#    when: always
-#    expire_in: 1 day
-#  before_script:
-#    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
-#    - echo $ANDROID_SERVICE_ACCOUNT_JSON_BASE64 | base64 --decode > android_service-account.json
-#  script:
-#    - fastlane android release
+compile:android:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","shell","medium" ]
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/outputs/bundle"
+      - "build/outputs/apk"
+  before_script:
+    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
+  script:
+    - ./gradlew
+      uploadAndroidDistributable
+      --stacktrace
+
+compile:linux-x64:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","linux","amd64","shell","medium" ]
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/compose"
+  script:
+    - ./gradlew
+      uploadPlatformDistributable
+      --stacktrace
+
+compile:windows-x64:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","win","amd64","shell" ]
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/compose"
+  script:
+    - ./gradlew
+      uploadPlatformDistributable
+      --stacktrace
+
+compile:macos-arm64:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","mac","arm64","shell","medium" ]
+  timeout: 30m
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/compose"
+  before_script:
+    - echo $APPLE_KEYCHAIN_FILE_BASE64 | base64 --decode > apple_keychain.keychain
+    - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
+    - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
+    - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
+  script:
+    - ./gradlew
+      uploadPlatformDistributable
+      --stacktrace
+
+compile:web:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","shell","medium" ]
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/compose"
+      - "build/dist"
+      - "**/build/**/yarn.lock"
+  script:
+    - ./gradlew
+      uploadWebZipDistributable
+      --stacktrace
+
+compile:prepare-website:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","shell","small" ]
+  rules:
+    - *if-main
+    - *if-release
+  artifacts:
+    paths:
+      - website/config/_default/params.yaml
+      - website/static/fastlane
+      - website/static/Tammy-Windows-x64.appinstaller
+      - website/static/Tammy-Windows-arm64.appinstaller
+  script:
+    - ./gradlew
+      prepareWebsite
+      --stacktrace
+
+compile:website:
+  stage: compile
+  interruptible: true
+  tags: [ "c2x","docker","medium" ]
+  image: registry.gitlab.com/pages/hugo/hugo_extended:latest
+  needs: [ "compile:prepare-website" ]
+  rules:
+    - *if-main
+    - *if-release
+  script:
+    - cd website
+    - hugo
+  artifacts:
+    paths:
+      - website/public
+
+check:changelog:
+  stage: check
+  interruptible: true
+  timeout: 5m
+  tags: [ "c2x","shell","small" ]
+  rules:
+    - *if-merge-request
+  script:
+    - git fetch origin main
+    - |
+      if git diff --name-only HEAD origin/main | grep "CHANGELOG.md"; then
+        echo "CHANGELOG.md has changed"
+      else
+        echo "CHANGELOG.md has not changed"
+        exit 1
+      fi
+
+publish:release:website:
+  stage: publish
+  tags: [ "c2x","linux","shell","small" ]
+  rules:
+    - *if-main
+    - *if-release
+  variables:
+    SSH_SERVER_PUBLIC_KEY: |
+      |1|rkXUG6Zg2U7Icsi1+W+16Bf0Agg=|aIDGBml+j9OBTthTodbxWcKZGN8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD24yORSNdYYIm+huvj+F9wc+BFsGSdi2V7uC+P54T1xJt+ll1LezHHps5jgRJU5JYEeGRWwRjaTMn+wNq8RwtEoDo830DckEzu/KqOVMi2o77XFi2e6oIcUKwvpouHHrSyLgeyipLaV392QNISj+AT3IXBICo/gXVj82kKN//je7hLkVnPX3/7fE3CWKTiTAh3iRa302gfPuDutaJ9Iu0Z+LLk/P5UWSdjhcXKMwPBWrQTK9Is9JI7YH0Kd49NyXrz3dgmyhm1HYtCu5yvwopcMf0iaFG40COlIHx8GzOp7/6E9mULWKS2A2942uxmRIxL71Cs1oTWJgck1ymNVv5vIPZ+/9ROrZtfoHuK8LIIZWupvFqBbYduJ7Th9rPnlNmI7I0QgTt7iRuxjyCNs7TdBZLidnEtNzcHo9iQ1kkWY0BRGk3PvkgmknzMmc43D4dj7AEK1YOVYXfYmeZXtLnK2BjYZcJ1bcFfvNOrPyQ+pVw78ZWm+n7XQgXkwKGr+2c=
+      |1|2ywjh4MQnSRFiNbupqXVfgDB1B0=|6neQereUz86gfJcvhEIOGrCXX3o= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGEPcfO5e/GIvHJrOb92rpz5x6xRR7V7QpAybe01OVA3xxgEXStOAHx+an8CGiyeRWrcuP9WQJLdkwRpLgF5fY=
+      |1|NqjIeCIEYbER3NUsDTJfBNO4rdY=|QxGhn1HkpIx4BBILLbI44AnIIIw= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk09gBfcCwKjFFF9dKn2pNTrplhAVjY4TrJABwUJWUg
+    SSH_USER: my_webapp__5
+    SSH_SERVER: connect2x.de
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client lftp -y )"
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $SSH_SERVER_PUBLIC_KEY >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - lftp -e "open sftp://connect2x.de; user $SSH_USER $SSH_PASSWORD_WEBSITE; mirror -X .* -X .*/ --reverse --verbose --delete website/public/ www/; bye"
+
+publish:release:webapp:
+  stage: publish
+  tags: [ "c2x","linux","shell","small" ]
+  rules:
+    - *if-release
+  variables:
+    SSH_SERVER_PUBLIC_KEY: |
+      |1|rkXUG6Zg2U7Icsi1+W+16Bf0Agg=|aIDGBml+j9OBTthTodbxWcKZGN8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD24yORSNdYYIm+huvj+F9wc+BFsGSdi2V7uC+P54T1xJt+ll1LezHHps5jgRJU5JYEeGRWwRjaTMn+wNq8RwtEoDo830DckEzu/KqOVMi2o77XFi2e6oIcUKwvpouHHrSyLgeyipLaV392QNISj+AT3IXBICo/gXVj82kKN//je7hLkVnPX3/7fE3CWKTiTAh3iRa302gfPuDutaJ9Iu0Z+LLk/P5UWSdjhcXKMwPBWrQTK9Is9JI7YH0Kd49NyXrz3dgmyhm1HYtCu5yvwopcMf0iaFG40COlIHx8GzOp7/6E9mULWKS2A2942uxmRIxL71Cs1oTWJgck1ymNVv5vIPZ+/9ROrZtfoHuK8LIIZWupvFqBbYduJ7Th9rPnlNmI7I0QgTt7iRuxjyCNs7TdBZLidnEtNzcHo9iQ1kkWY0BRGk3PvkgmknzMmc43D4dj7AEK1YOVYXfYmeZXtLnK2BjYZcJ1bcFfvNOrPyQ+pVw78ZWm+n7XQgXkwKGr+2c=
+      |1|2ywjh4MQnSRFiNbupqXVfgDB1B0=|6neQereUz86gfJcvhEIOGrCXX3o= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGEPcfO5e/GIvHJrOb92rpz5x6xRR7V7QpAybe01OVA3xxgEXStOAHx+an8CGiyeRWrcuP9WQJLdkwRpLgF5fY=
+      |1|NqjIeCIEYbER3NUsDTJfBNO4rdY=|QxGhn1HkpIx4BBILLbI44AnIIIw= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk09gBfcCwKjFFF9dKn2pNTrplhAVjY4TrJABwUJWUg
+    SSH_USER: my_webapp__4
+    SSH_SERVER: connect2x.de
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client lftp -y )"
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $SSH_SERVER_PUBLIC_KEY >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - lftp -e "open sftp://connect2x.de; user $SSH_USER $SSH_PASSWORD_APP; mirror -X .* -X .*/ --reverse --verbose --delete build/dist/composeWebCompatibility/productionExecutable/ www/; bye"
+
+publish:beta:playstore:
+  stage: publish
+  interruptible: true
+  tags: [ "c2x","linux","shell","small" ]
+  rules:
+    - *if-main
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+    paths:
+      - "build/outputs/bundle"
+      - "build/outputs/apk"
+  before_script:
+    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
+    - echo $ANDROID_SERVICE_ACCOUNT_JSON_BASE64 | base64 --decode > android_service-account.json
+  script:
+    - fastlane android releaseBeta
+
+publish:release:playstore:
+  stage: publish
+  interruptible: true
+  tags: [ "c2x","linux","shell","small" ]
+  rules:
+    - *if-release
+  artifacts:
+    name: build
+    when: always
+    expire_in: 1 day
+  before_script:
+    - echo $ANDROID_RELEASE_STORE_FILE_BASE64 | base64 --decode > android_keystore.jks
+    - echo $ANDROID_SERVICE_ACCOUNT_JSON_BASE64 | base64 --decode > android_service-account.json
+  script:
+    - fastlane android release
 
 publish:release:ios:
   stage: publish
@@ -286,8 +260,8 @@ publish:release:ios:
   tags: [ "saas-macos-large-m2pro" ]
   image: "macos-26-xcode-26"
   timeout: 2h
-#  rules:
-#    - *if-release
+  #  rules:
+  #    - *if-release
   artifacts:
     name: build
     when: always
@@ -313,14 +287,12 @@ publish:release:ios:
     - ./gradlew iosMarketingVersion
     - fastlane ios beta --verbose
 
-
-#publish:release:gitlab:
-#  stage: publish
-#  tags: [ "connect2x-linux-shell-small" ]
-#  image: $BUILD_LINUX_IMAGE_NAME_BASE
-#  rules:
-#    - *if-release
-#  script:
-#    - ./gradlew
-#      createGitLabRelease
-#      --stacktrace
+publish:release:gitlab:
+  stage: publish
+  tags: [ "c2x","shell","small" ]
+  rules:
+    - *if-release
+  script:
+    - ./gradlew
+      createGitLabRelease
+      --stacktrace
