@@ -271,18 +271,17 @@ publish:release:ios:
     - echo $APPLE_KEYCHAIN_FILE_BASE64 | base64 --decode > apple_keychain.keychain
     - security list-keychains -d user -s "$(realpath apple_keychain.keychain)"
     - security unlock-keychain -p $APPLE_KEYCHAIN_PASSWORD "$(realpath apple_keychain.keychain)"
-#    - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
-#    - echo $APPLE_MOBILE_PROVISION | base64 --decode > tammy.mobileprovision
-#    - echo $APPLE_DEV_CERT_BASE64 | base64 --decode > dev.cer
-#    - echo $APPLE_DEV_PK_BASE64 | base64 --decode > dev.p12
-#    - echo $APPLE_DISTRIBUTION_CERT_BASE64 | base64 --decode > dist.cer
-#    - echo $APPLE_DISTRIBUTION_PK_BASE64 | base64 --decode > dist.p12
-#    - echo $APPLE_AUTH_KEY_BASE64 | base64 --decode > AuthKey_9C3783X4A3.p8
-#    - xcodebuild -version # might help to identify differences in local and remote XCode versions
+    - security set-keychain-settings -t 600 "$(realpath apple_keychain.keychain)"
+    - echo $APPLE_MOBILE_PROVISION | base64 --decode > tammy.mobileprovision
+    - echo $APPLE_DEV_CERT_BASE64 | base64 --decode > dev.cer
+    - echo $APPLE_DEV_PK_BASE64 | base64 --decode > dev.p12
+    - echo $APPLE_DISTRIBUTION_CERT_BASE64 | base64 --decode > dist.cer
+    - echo $APPLE_DISTRIBUTION_PK_BASE64 | base64 --decode > dist.p12
+    - echo $APPLE_AUTH_KEY_BASE64 | base64 --decode > AuthKey_9C3783X4A3.p8
+    - xcodebuild -version # might help to identify differences in local and remote XCode versions
   script:
-#    - ./gradlew iosMarketingVersion
-#    - fastlane ios beta --verbose
-     - echo "hallo"
+    - ./gradlew iosMarketingVersion
+    - fastlane ios beta --verbose
 
 #publish:release:gitlab:
 #  stage: publish
