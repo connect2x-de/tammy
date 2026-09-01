@@ -711,7 +711,7 @@ class TextMessageViewModelMock(
     override val body: String,
 ) : RoomMessageTimelineElementViewModel.TextBased.Text {
     override val formattedBody: String? = null
-    override val formattedBodyContent: HtmlNode.HtmlElement? =
+    override val formattedBodyContent: HtmlNode.HtmlElement =
         HtmlNode.HtmlElement("#root", emptyMap(), listOf(HtmlNode.TextContent(body)))
     override val mentionsInBody: Map<IntRange, StateFlow<TimelineElementMention?>> = mapOf()
     override val mentionsInFormattedBody: StateFlow<Map<String, TimelineElementMention?>> = MutableStateFlow(mapOf())
