@@ -24,6 +24,7 @@ import de.connect2x.trixnity.messenger.viewmodel.room.RoomViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.settings.ExtrasRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.*
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.*
+import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.EventIdOrTransactionId.Companion.EventIdOrTransactionId
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.message.RoomMessageTimelineElementViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.AccountViewModel
 import de.connect2x.trixnity.messenger.viewmodel.roomlist.RoomListElementViewModel
@@ -671,7 +672,7 @@ class TimelineElementHolderViewModelMock(
                                 EventReaction(
                                     reaction,
                                     UserInfoElement(UserId(number.toString(), "server"), number.toString(), ""),
-                                    EventId(number.toString()),
+                                    EventIdOrTransactionId(number.toString()),
                                     false,
                                 )
                             )
@@ -728,6 +729,7 @@ class ImageMessageViewModelMock(
     override val thumbnailLoading: StateFlow<Boolean> = MutableStateFlow(false)
     override val thumbnailWidth: Int? = null
     override val thumbnailHeight: Int? = null
+    override val thumbnailAutoDownloadLimit: Long = 0L
 
     @MSC2448
     override val blurhash: String? = null
@@ -750,11 +752,14 @@ class ImageMessageViewModelMock(
     override val downloadMediaResult: StateFlow<PlatformMedia?> = MutableStateFlow(null)
     override val downloadMediaProgress: StateFlow<FileTransferProgressElement?> = MutableStateFlow(null)
     override val downloadMediaError: StateFlow<String?> = MutableStateFlow(null)
+    override val saveDialogOpen: StateFlow<Boolean> = MutableStateFlow(false)
 
     override fun loadMedia() {}
     override fun cancelLoadMedia() {}
     override fun downloadMedia(processFile: suspend (PlatformMedia) -> Unit, onDownloadCancelled: () -> Unit) {}
     override fun cancelDownloadMedia() {}
+    override fun showSaveDialog() {}
+    override fun hideSaveDialog(errorShown: Boolean) {}
     override fun openMention(mention: TimelineElementMention) {}
     override val isMentioned: Boolean = false
 }
