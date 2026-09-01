@@ -127,6 +127,7 @@ platform :ios do
             "de-DE" => "Fehlerbehebungen und Leistungsverbesserungen."
           },
           force: true,
+          precheck_include_in_app_purchases: false,
         )
     end
 end
