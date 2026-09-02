@@ -84,8 +84,7 @@ platform :ios do
             readonly: true,
             git_branch: "main",
             clone_branch_directly: true,
-            keychain_name: "ios_keychain.keychain",
-            keychain_password: ENV['IOS_KEYCHAIN_PASSWORD'],
+            keychain_name: "ios_keychain",
         )
         update_code_signing_settings(
               use_automatic_signing: false,
@@ -95,10 +94,6 @@ platform :ios do
               targets: "Tammy for iOS",
               code_sign_identity: "Apple Distribution",
               profile_name: "match AppStore de.connect2x.tammy",
-        )
-        unlock_keychain(
-            path: "ios_keychain.keychain",
-            password: ENV['IOS_KEYCHAIN_PASSWORD'],
         )
         marketing_version = File.read("../build/generatedSrc/version.txt")
         puts marketing_version
