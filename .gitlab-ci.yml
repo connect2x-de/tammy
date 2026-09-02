@@ -278,6 +278,8 @@ publish:release:ios:
   script:
     - ./gradlew iosMarketingVersion
     - fastlane ios beta --verbose
+  after_script:
+    - fastlane ios cleanup --verbose
 
 #publish:release:gitlab:
 #  stage: publish
