@@ -42,6 +42,8 @@ compile:android:
     - ./gradlew
       uploadAndroidDistributable
       --stacktrace
+  after_script:
+    - rm android_keystore.jks
 
 compile:linux-x64:
   stage: compile
