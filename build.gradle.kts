@@ -424,14 +424,6 @@ val distributions = listOf(
         listOf("packageReleasePlatformZip")
     ),
     Distribution(
-        "dmg", "MacOS", "x64",
-        listOf("packageReleaseDmg", "notarizeReleaseDmg")
-    ),
-    Distribution(
-        "zip", "MacOS", "x64",
-        listOf("packageReleasePlatformZip")
-    ),
-    Distribution(
         "dmg", "MacOS", "arm64",
         listOf("packageReleaseDmg", "notarizeReleaseDmg")
     ),

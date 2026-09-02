@@ -104,6 +104,8 @@ compile:macos-arm64:
     - ./gradlew
       uploadPlatformDistributable
       --stacktrace
+  after_script:
+    - security delete-keychain "$(realpath apple_keychain.keychain)"
 
 compile:web:
   stage: compile
