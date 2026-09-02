@@ -135,6 +135,7 @@ platform :ios do
     end
     lane :cleanup do
         delete_keychain(name: "ios_keychain")
+    end
 end
 
 platform :ios do
