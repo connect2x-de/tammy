@@ -152,6 +152,7 @@ kotlin {
                 implementation(sharedLibs.lognity.core)
                 implementation(sharedLibs.lognity.config)
                 implementation(sharedLibs.lognity.core.config)
+                implementation(libs.okio.fakefilesystem) // for iOS, shared code needs to be located here
             }
             //kotlin.srcDir(buildConfigGenerator.map { it.outputs })
         }
@@ -181,10 +182,11 @@ kotlin {
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.uiTest)
-                implementation(libs.okio.fakefilesystem)
+                implementation(sharedLibs.compose.uiTest)
             }
+        }
+        androidInstrumentedTest {
+            dependsOn(commonTest.get())
         }
     }
 }
@@ -378,6 +380,22 @@ tasks.register("scanAndroidLibreForNonFreeClasses", Exec::class) {
             throw GradleException("F-Droid scanner found ${problemClasses.size} problems")
         }
     }
+}
+
+val iosMarketingVersion by tasks.registering {
+    group = "build config"
+    description = "we need a MARKETING_VERSION for iOS releases that is coming from gradle"
+
+    val generatedSrc = layout.buildDirectory.dir("generatedSrc/")
+    doLast {
+        val outputFile = generatedSrc.get().file("version.txt")
+        outputFile.asFile.apply {
+            ensureParentDirsCreated()
+            createNewFile()
+            writeText(appPublishedVersion)
+        }
+    }
+    outputs.dirs(generatedSrc)
 }
 
 val gitLabProjectUrl =
