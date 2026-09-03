@@ -283,7 +283,8 @@ publish:release:ios:
     - ./gradlew iosMarketingVersion
     - fastlane ios beta --verbose
   after_script:
-    - fastlane ios cleanup --verbose
+    - fastlane ios cleanup --verbose # removes fastlane setup like the temp keychain
+    - rm tammy.mobileprovision dev.cer dev.p12 dist.cer dist.p12 AuthKey_9C3783X4A3.p8
 
 publish:release:gitlab:
   stage: publish
