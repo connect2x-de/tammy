@@ -719,7 +719,7 @@ val platformZipDistribution =
     distributions.first { it.type == "zip" && it.platform == platformName && it.architecture == architectureName }
 val zipDistributionDir = distributionDir.map { it.dir("zip").also { it.asFile.mkdirs() } }
 
-val packageReleasePlatformZip by tasks.creating(Zip::class) {
+val packageReleasePlatformZip by tasks.registering(Zip::class) {
     group = "compose desktop"
     from(appDistributionDir)
 
