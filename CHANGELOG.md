@@ -9,8 +9,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
-- Automated iOS releases
-
 ### Changed
 
 ### Deprecated
@@ -20,6 +18,16 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 ### Fixed
 
 ### Security
+
+## 26.9.1
+
+### Added
+
+- Automated iOS releases
+
+### Changed
+
+- Update Trixnity Messenger to 4.10.2
 
 ## 26.9.0
 
