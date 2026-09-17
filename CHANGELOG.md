@@ -19,6 +19,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Security
 
+## 26.9.2
+
+### Changed
+
+- Update Trixnity Messenger to 4.10.3
+
 ## 26.9.1
 
 ### Added
