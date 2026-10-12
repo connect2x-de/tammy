@@ -36,6 +36,7 @@ import de.connect2x.trixnity.messenger.viewmodel.sharing.SharingRouter
 import de.connect2x.trixnity.messenger.viewmodel.util.ErrorType
 import de.connect2x.trixnity.messenger.viewmodel.util.EventReaction
 import de.connect2x.trixnity.messenger.viewmodel.util.EventReactions
+import de.connect2x.trixnity.messenger.viewmodel.util.ReactionStatus
 import de.connect2x.trixnity.messenger.viewmodel.verification.SelfVerificationRouter
 import de.connect2x.trixnity.messenger.viewmodel.verification.VerificationRouter
 import de.connect2x.trixnity.utils.nextString
@@ -337,6 +338,7 @@ class RoomListElementViewModelMock(
 
     override fun rejectInvitation() {}
     override fun rejectInvitationAndBlockInviter() {}
+    override fun leaveRoom() {}
     override fun unknock() {}
     override fun forgetRoom() {}
 }
@@ -602,8 +604,10 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     override val isAllowedToSendMessages: StateFlow<Boolean> = MutableStateFlow(true)
     override val textField: TextFieldViewModel = TextFieldViewModelImpl(100, "Don't forget the games 😉")
     override val isSendEnabled: StateFlow<Boolean> = MutableStateFlow(true)
+
     @Deprecated("use suggestedMentions instead", replaceWith = ReplaceWith("suggestedMentions"))
     override val listOfMentions: StateFlow<List<UserInfoElement>?> = MutableStateFlow(null)
+
     @Deprecated("use suggestedMentionsLoading instead", replaceWith = ReplaceWith("suggestedMentionsLoading"))
     override val listOfMentionsLoading: StateFlow<Boolean> = MutableStateFlow(false)
     override val suggestedMentions: StateFlow<List<InputAreaViewModel.SuggestedMention>?> = MutableStateFlow(null)
@@ -621,7 +625,9 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     override val showAttachmentSelectDialog: StateFlow<Boolean> = MutableStateFlow(false)
 
     @Deprecated("use selectionMention with id instead")
-    override fun selectMention(userId: UserId) {}
+    override fun selectMention(userId: UserId) {
+    }
+
     override fun selectMention(id: String) {}
 
     override fun closeAttachmentDialog() {}
@@ -658,6 +664,7 @@ class TimelineElementHolderViewModelMock(
     override val isReplaced: StateFlow<Boolean> = MutableStateFlow(false)
     override val redactionError: StateFlow<String?> = MutableStateFlow(null)
     override val showRedactionWarning: StateFlow<Boolean> = MutableStateFlow(false)
+
     @Deprecated("when supported by the homeserver, redactions are applied immediately")
     override val redactionInProgress: StateFlow<Boolean> = MutableStateFlow(false)
     override val showLoadingIndicatorAfter: StateFlow<Boolean> = MutableStateFlow(false)
@@ -673,7 +680,7 @@ class TimelineElementHolderViewModelMock(
                                     reaction,
                                     UserInfoElement(UserId(number.toString(), "server"), number.toString(), ""),
                                     EventIdOrTransactionId(number.toString()),
-                                    false,
+                                    ReactionStatus.FromOtherAccount,
                                 )
                             )
                         }
@@ -692,7 +699,7 @@ class TimelineElementHolderViewModelMock(
     override val showSender: StateFlow<Boolean?> = MutableStateFlow(showSender)
     override val showBigGapBefore: StateFlow<Boolean?> = MutableStateFlow(false)
     override val sendError: StateFlow<String?> = MutableStateFlow(null)
-
+    override fun openSenderProfile() {}
     override fun redact() {}
     override fun acceptRedactionWarning() {}
     override fun cancelRedactionWarning() {}
