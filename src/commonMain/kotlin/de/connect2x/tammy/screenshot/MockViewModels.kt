@@ -11,6 +11,7 @@ import de.connect2x.trixnity.core.model.UserId
 import de.connect2x.trixnity.core.model.events.m.Presence
 import de.connect2x.trixnity.core.model.events.m.room.RoomMessageEventContent
 import de.connect2x.trixnity.crypto.key.UserTrustLevel
+import de.connect2x.trixnity.messenger.abi.TrixnityMessengerCallApi
 import de.connect2x.trixnity.messenger.abi.TrixnityMessengerPrivateApi
 import de.connect2x.trixnity.messenger.util.FileDescriptor
 import de.connect2x.trixnity.messenger.util.FileTransferProgressElement
@@ -21,6 +22,7 @@ import de.connect2x.trixnity.messenger.viewmodel.media.AudioRecorderViewModel
 import de.connect2x.trixnity.messenger.viewmodel.media.MediaPlayerViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.RoomViewModel
+import de.connect2x.trixnity.messenger.viewmodel.room.call.CallControlViewModel
 import de.connect2x.trixnity.messenger.viewmodel.room.settings.ExtrasRouter
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.*
 import de.connect2x.trixnity.messenger.viewmodel.room.timeline.elements.*
@@ -331,6 +333,9 @@ class RoomListElementViewModelMock(
     override val isUnread: StateFlow<Boolean?> = MutableStateFlow(false)
     override val notificationCount: StateFlow<String?> = MutableStateFlow(null)
 
+    @TrixnityMessengerCallApi
+    override val hasRunningCall: StateFlow<Boolean> = MutableStateFlow(false)
+
     override fun acceptInvitation() {}
     override fun clearError() {}
     override fun markUnread() {}
@@ -564,6 +569,9 @@ class RoomHeaderViewModelMock(locale: Locale) : RoomHeaderViewModel {
     override val canUnblockUser: StateFlow<Boolean> = MutableStateFlow(false)
     override val canVerifyUser: StateFlow<Boolean> = MutableStateFlow(false)
     override val knockingMembersCount: StateFlow<Int> = MutableStateFlow(0)
+
+    @TrixnityMessengerCallApi
+    override val call: CallControlViewModel? = null
     override val error: StateFlow<String?> = MutableStateFlow(null)
     override val isUserBlocked: StateFlow<Boolean> = MutableStateFlow(false)
     override val isDirectChat: StateFlow<Boolean> = MutableStateFlow(false)
