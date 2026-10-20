@@ -226,7 +226,7 @@ publish:release:webapp:
 publish:beta:playstore:
   stage: publish
   interruptible: true
-  tags: [ "c2x","linux","shell","small" ]
+  tags: [ "c2x","shell","small" ]
   rules:
     - *if-main
   artifacts:
@@ -245,7 +245,7 @@ publish:beta:playstore:
 publish:release:playstore:
   stage: publish
   interruptible: true
-  tags: [ "c2x","linux","shell","small" ]
+  tags: [ "c2x","shell","small" ]
   rules:
     - *if-release
   artifacts:
