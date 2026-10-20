@@ -9,6 +9,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
+- Added beta web release ci task
+
 ### Changed
 
 - Enable nav3
