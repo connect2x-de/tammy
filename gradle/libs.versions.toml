@@ -4,6 +4,7 @@ appPublishedVersion = "26.9.2" # The current published version of this app
 appVersion = "26.10.1" # The next version of this app
 
 trixnityMessenger = "4.11.0-SNAPSHOT.CI-20261019.202005" # https://gitlab.com/connect2x/trixnity-messenger/trixnity-messenger/-/packages
+livekitnityMetadataFallback = "0.0.1-SNAPSHOT.CI-20261019.202005" # Temporary workaround for this Messenger snapshot
 
 downloadGradlePlugin = "5.7.0" # https://github.com/michel-kraemer/gradle-download-task/releases
 copyWebpackPlugin = "12.0.2" # https://github.com/webpack-contrib/copy-webpack-plugin/releases

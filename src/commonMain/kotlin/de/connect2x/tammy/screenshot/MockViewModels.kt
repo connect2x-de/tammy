@@ -759,6 +759,11 @@ class ImageMessageViewModelMock(
     override val size: String? = null
     override val mimeType: String? = null
     override val hasCaption: Boolean = caption != null
+
+    @Deprecated(
+        "This will be removed in the future for consistency with downloadMedia behaviour, please use loadMediaResultBytes instead",
+        replaceWith = ReplaceWith("loadMediaResultBytes")
+    )
     override val loadMediaResult: StateFlow<ByteArray?> = MutableStateFlow(null)
     override val loadMediaResultPlatformMedia: StateFlow<PlatformMedia?> = MutableStateFlow(null)
     override val loadMediaResultBytes: StateFlow<ByteArray?> = MutableStateFlow(thumbnail)
