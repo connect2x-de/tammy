@@ -223,7 +223,7 @@ publish:release:webapp:
   script:
     - lftp -e "open sftp://connect2x.de; user $SSH_USER $SSH_PASSWORD_APP; mirror -X .* -X .*/ --reverse --verbose --delete build/dist/composeWebCompatibility/productionExecutable/ www/; bye"
 
-publish:release:beta:webapp:
+publish:beta:webapp:
   stage: publish
   tags: [ "c2x","linux","shell","small" ]
   rules:
