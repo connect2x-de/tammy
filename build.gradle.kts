@@ -27,18 +27,6 @@ plugins {
 
 configureJava(sharedLibs.versions.targetJvm)
 
-// Temporary workaround: Messenger's published Gradle metadata retains "included"
-// for Livekitnity dependencies. Keep this version aligned with the Messenger snapshot.
-val livekitnityMetadataFallback = libs.versions.livekitnityMetadataFallback.get()
-configurations.configureEach {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "de.connect2x.livekitnity" && requested.version == "included") {
-            useVersion(livekitnityMetadataFallback)
-            because("Messenger's published metadata contains an unresolved composite-build version")
-        }
-    }
-}
-
 val appVersion = libs.versions.appVersion.get()
 val appPublishedVersion = libs.versions.appPublishedVersion.get()
 if (CI.isRelease)
