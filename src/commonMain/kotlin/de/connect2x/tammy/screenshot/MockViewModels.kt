@@ -621,6 +621,7 @@ class InputAreaViewModelModelMock : InputAreaViewModel {
     override val suggestedMentions: StateFlow<List<InputAreaViewModel.SuggestedMention>?> = MutableStateFlow(null)
     override val suggestedMentionsLoading: StateFlow<Boolean> = MutableStateFlow(false)
     override val useMarkdown: StateFlow<Boolean> = MutableStateFlow(false)
+    override val stickerPacks = null
 
     @OptIn(TrixnityMessengerPrivateApi::class)
     override val audio: AudioRecordingAreaViewModel = object : AudioRecordingAreaViewModel {
@@ -731,6 +732,8 @@ class TextMessageViewModelMock(
     override val mentionsInBody: Map<IntRange, StateFlow<TimelineElementMention?>> = mapOf()
     override val mentionsInFormattedBody: StateFlow<Map<String, TimelineElementMention?>> = MutableStateFlow(mapOf())
     override fun openMention(mention: TimelineElementMention) {}
+    override suspend fun loadInlineImage(uri: String, width: Int, height: Int): ByteArray? = null
+
     override val isMentioned: Boolean = false
 }
 
@@ -782,4 +785,5 @@ class ImageMessageViewModelMock(
     override fun hideSaveDialog(errorShown: Boolean) {}
     override fun openMention(mention: TimelineElementMention) {}
     override val isMentioned: Boolean = false
+    override suspend fun loadInlineImage(uri: String, width: Int, height: Int): ByteArray? = null
 }
