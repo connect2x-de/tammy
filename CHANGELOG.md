@@ -14,7 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 ### Changed
 
 - Enable nav3
-- Update Trixnity Messenger to 4.11.0-SNAPSHOT.CI-20261111.074348
+- Update Trixnity Messenger to 4.11.0-SNAPSHOT.CI-20261112.172231
 
 ### Deprecated
 
