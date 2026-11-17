@@ -16,8 +16,19 @@ config.module.rules =
 
 // Minification
 if (config.mode === "production") {
+    const TerserPlugin = require("terser-webpack-plugin");
     config.optimization = {
         minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    format: {
+                        comments: false
+                    },
+                },
+            }),
+        ],
     };
 } else {
     config.optimization = {
