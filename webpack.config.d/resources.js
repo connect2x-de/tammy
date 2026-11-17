@@ -16,19 +16,9 @@ config.module.rules =
 
 // Minification
 if (config.mode === "production") {
-    const TerserPlugin = require("terser-webpack-plugin");
     config.optimization = {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                extractComments: false,
-                terserOptions: {
-                    format: {
-                        comments: false
-                    },
-                },
-            }),
-        ],
+        minimize: false, // temporary disabled, because build fails with "Set maximum size exceeded"
+        minimizer: [],
     };
 } else {
     config.optimization = {
