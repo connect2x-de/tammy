@@ -123,7 +123,7 @@ compile:web:
       - "build/dist"
       - "**/build/**/yarn.lock"
   script:
-    - export NODE_OPTIONS="--max-old-space-size=8192"
+    - export NODE_OPTIONS="--max-old-space-size=12288"
     - ./gradlew
       uploadWebZipDistributable
       --stacktrace
